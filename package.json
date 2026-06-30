@@ -13,12 +13,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest --watch"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
+    "prettier": "^3.9.4",
     "typescript": "^5.9.0",
     "vitest": "^4.1.9"
   }
