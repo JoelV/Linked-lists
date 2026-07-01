@@ -59,6 +59,10 @@ describe('LinkedList', () => {
         subject.add(3);
         expect(subject.peakLast()).toEqual(3);
         expect((subject as any).head.value).toEqual(1)
+        const secondNode = (subject as any).head.next;
+        expect(secondNode.previous.value).toEqual(1)
+        expect(secondNode.value).toEqual(2)
+        expect(secondNode.next.value).toEqual(3)
       });
     });
   });
