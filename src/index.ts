@@ -1,30 +1,37 @@
-import { ListNode } from "./list-node";
+import { ListNode } from './list-node';
 
 export class LinkedList<T> {
   private head: ListNode<T> | null = null;
 
   constructor() {}
 
-  public add(v: T): void {
+  public add(v: T): boolean {
     const node = new ListNode(v);
-    if(!this.head) {
+    if (!this.head) {
       this.head = node;
-      return;
+      return true;
     }
     let currentNode = this.head;
-    while(currentNode?.next) {
-      currentNode = currentNode.next
+    if (currentNode.value === v) {
+      return false;
+    }
+    while (currentNode?.next) {
+      if (currentNode.value === v) {
+        return false;
+      }
+      currentNode = currentNode.next;
     }
     currentNode.next = node;
     node.previous = currentNode;
+    return true;
   }
 
   public peakLast(): T | null {
     let currentNode = this.head;
-    if(!currentNode) return currentNode;
+    if (!currentNode) return currentNode;
 
-    while(currentNode?.next) {
-      currentNode = currentNode.next
+    while (currentNode?.next) {
+      currentNode = currentNode.next;
     }
     return currentNode.value;
   }

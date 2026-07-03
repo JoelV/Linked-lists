@@ -13,21 +13,21 @@ describe('LinkedList', () => {
     describe('when linked list has one element', () => {
       it('should return the element', () => {
         const subject = new LinkedList();
-        (subject as any).head = new ListNode(1)
+        (subject as any).head = new ListNode(1);
         expect(subject.peakLast()).toEqual(1);
       });
     });
     describe('when linked list has two element', () => {
       it('should return the last element', () => {
         const subject = new LinkedList();
-        (subject as any).head = new ListNode(1, null, new ListNode(2))
+        (subject as any).head = new ListNode(1, null, new ListNode(2));
         expect(subject.peakLast()).toEqual(2);
       });
     });
     describe('when linked list has three element', () => {
       it('should return the last element', () => {
         const subject = new LinkedList();
-        (subject as any).head = new ListNode(1, null, new ListNode(2, null, new ListNode(3)))
+        (subject as any).head = new ListNode(1, null, new ListNode(2, null, new ListNode(3)));
         expect(subject.peakLast()).toEqual(3);
       });
     });
@@ -36,19 +36,38 @@ describe('LinkedList', () => {
     describe('when the linked list is empty', () => {
       it('should add a new node to the linked list', () => {
         const subject = new LinkedList();
-        subject.add(1);
+        const result = subject.add(1);
         expect(subject.peakLast()).toEqual(1);
+        expect(result).toEqual(true);
       });
     });
     describe('when the linked list has one element', () => {
       it('should add a new node to the linked list', () => {
         const subject = new LinkedList();
-        subject.add(1);
-        subject.add(2);
+        const result1 = subject.add(1);
+        const result2 = subject.add(2);
+
         expect(subject.peakLast()).toEqual(2);
-        expect((subject as any).head.value).toEqual(1)
+        expect((subject as any).head.value).toEqual(1);
         const secondNode = (subject as any).head.next;
-        expect(secondNode.previous.value).toEqual(1)
+        expect(secondNode.previous.value).toEqual(1);
+        expect(result1).toEqual(true);
+        expect(result2).toEqual(true);
+      });
+
+      describe('when linked list already has the same element', () => {
+        it('should return false', () => {
+          const subject = new LinkedList();
+          const result1 = subject.add(1);
+          const result2 = subject.add(1);
+
+          expect(subject.peakLast()).toEqual(1);
+          expect((subject as any).head.value).toEqual(1);
+          expect((subject as any).head.next).toBeNull();
+          expect((subject as any).head.previous).toBeNull();
+          expect(result1).toEqual(true);
+          expect(result2).toEqual(false);
+        });
       });
     });
     describe('when the linked list has two element', () => {
@@ -58,11 +77,11 @@ describe('LinkedList', () => {
         subject.add(2);
         subject.add(3);
         expect(subject.peakLast()).toEqual(3);
-        expect((subject as any).head.value).toEqual(1)
+        expect((subject as any).head.value).toEqual(1);
         const secondNode = (subject as any).head.next;
-        expect(secondNode.previous.value).toEqual(1)
-        expect(secondNode.value).toEqual(2)
-        expect(secondNode.next.value).toEqual(3)
+        expect(secondNode.previous.value).toEqual(1);
+        expect(secondNode.value).toEqual(2);
+        expect(secondNode.next.value).toEqual(3);
       });
     });
   });
