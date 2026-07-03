@@ -9,6 +9,9 @@ describe('ListNode', () => {
     it('should set value to 1', () => {
       const subject = new ListNode(1);
       expect(subject.value).toEqual(1);
+      expect(subject.next).toBeNull();
+      expect(subject.previous).toBeNull();
+
     });
     describe('when created with previous', () => {
       it('should set value to previous', () => {

@@ -4,10 +4,10 @@ export class ListNode<T> {
 
   constructor(
     public value: T,
-    previous?: ListNode<T> | null,
-    next?: ListNode<T> | null,
+    previous: ListNode<T> | null = null,
+    next: ListNode<T> | null = null,
   ) {
-    this.previous = previous ?? null;
-    this.next = next ?? null;
+    this.previous = previous;
+    this.next = next;
   }
 }
