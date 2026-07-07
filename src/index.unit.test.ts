@@ -87,7 +87,7 @@ describe('LinkedList', () => {
             describe('when index is 0', () => {
               it('should add element', () => {
                 const subject = new LinkedList();
-                subject.add(0, 1);
+                subject.add(0, 1); 
                 const firstNode = (subject as any).head
                 expect(firstNode.value).toEqual(1)
                 expect(firstNode.next).toBeNull();
@@ -101,6 +101,9 @@ describe('LinkedList', () => {
               })
             })
           })
+          describe.todo('when there is one element in the list')
+          describe.todo('when there is two elements in the list')
+          describe.todo('when there is three elements in the list')
         })
       });
     });
