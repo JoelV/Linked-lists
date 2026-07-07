@@ -32,8 +32,15 @@ export class LinkedList<T> {
       }
       if (index === 1) {
         const firstNode = this.head;
+        const nextNode = firstNode.next;
         firstNode.next = new ListNode(v);
-        firstNode.next.previous = firstNode;
+        if (nextNode === null) {
+          firstNode.next.previous = firstNode;
+        } else {
+          nextNode.previous = firstNode.next;
+          firstNode.next.next = nextNode;
+          firstNode.next.previous = firstNode;
+        }
       }
       return;
     }

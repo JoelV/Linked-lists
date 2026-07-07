@@ -154,7 +154,25 @@ describe('LinkedList', () => {
                 expect(firstNode.next.next.next).toBeNull();
               })
             });
-            describe.todo('when index is 1');
+            describe('when index is 1', () => {
+              it('should add element', () => {
+                const listNodeZero = new ListNode(0)
+                const listNodeOne = new ListNode(1)
+                listNodeZero.next = listNodeOne
+                listNodeOne.previous = listNodeZero
+                const subject = new LinkedList<number>();
+                (subject as any).head = listNodeZero;
+                subject.add(1, 2);
+                const firstNode = (subject as any).head;
+                expect(firstNode.value).toEqual(0);
+                expect(firstNode.previous).toBeNull();
+                expect(firstNode.next.value).toEqual(2);
+                expect(firstNode.next.previous.value).toEqual(0);
+                expect(firstNode.next.next.value).toEqual(1);
+                expect(firstNode.next.next.previous.value).toEqual(2);
+                expect(firstNode.next.next.next).toBeNull();
+              })
+            });
             describe.todo('when index is 2');
             describe.todo('when index is out of range');
           });
