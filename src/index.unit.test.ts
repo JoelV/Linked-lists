@@ -87,20 +87,20 @@ describe('LinkedList', () => {
             describe('when index is 0', () => {
               it('should add element', () => {
                 const subject = new LinkedList<number>();
-                subject.add(0, 1); 
-                const firstNode = (subject as any).head
-                expect(firstNode.value).toEqual(1)
+                subject.add(0, 1);
+                const firstNode = (subject as any).head;
+                expect(firstNode.value).toEqual(1);
                 expect(firstNode.next).toBeNull();
                 expect(firstNode.previous).toBeNull();
-              });  
+              });
             });
             describe('when index is is out of range', () => {
               it('should throw and index out of bounds exception', () => {
                 const subject = new LinkedList<number>();
                 expect(() => subject.add(1, 1)).toThrow('IndexOutOfBoundsException');
-              })
-            })
-          })
+              });
+            });
+          });
           describe('when there is one element in the list', () => {
             describe('when index is 0', () => {
               it('should add element', () => {
@@ -108,33 +108,41 @@ describe('LinkedList', () => {
                 const subject = new LinkedList<number>();
                 (subject as any).head = initialNode;
                 subject.add(0, 2);
-                const firstNode = (subject as any).head
-                expect(firstNode.value).toEqual(2)
-                expect(firstNode.next.value).toEqual(1)
+                const firstNode = (subject as any).head;
+                expect(firstNode.value).toEqual(2);
+                expect(firstNode.next.value).toEqual(1);
                 expect(firstNode.previous).toBeNull();
-                expect(initialNode.value).toEqual(1)
+                expect(initialNode.value).toEqual(1);
                 expect(initialNode.next).toBeNull();
                 expect(initialNode.previous?.value).toEqual(2);
-              });  
-            });  
-             describe('when index is 1', () => {
+              });
+            });
+            describe('when index is 1', () => {
               it('should add element', () => {
                 const initialNode = new ListNode(1);
                 const subject = new LinkedList<number>();
                 (subject as any).head = initialNode;
                 subject.add(1, 2);
-                const firstNode = (subject as any).head
-                expect(firstNode.value).toEqual(1)
-                expect(firstNode.next.value).toEqual(2)
+                const firstNode = (subject as any).head;
+                expect(firstNode.value).toEqual(1);
+                expect(firstNode.next.value).toEqual(2);
                 expect(firstNode.previous).toBeNull();
                 expect(initialNode.next?.value).toEqual(2);
-                expect(initialNode.previous).toBeNull()
-              });  
-            });  
-          })
-          describe.todo('when there is two elements in the list')
-          describe.todo('when there is three elements in the list')
-        })
+                expect(initialNode.previous).toBeNull();
+              });
+            });
+             describe('when index is is out of range', () => {
+              it('should throw and index out of bounds exception', () => {
+                const initialNode = new ListNode(1);
+                const subject = new LinkedList<number>();
+                (subject as any).head = initialNode;
+                expect(() => subject.add(2, 2)).toThrow('IndexOutOfBoundsException');
+              })
+            })
+          });
+          describe.todo('when there is two elements in the list');
+          describe.todo('when there is three elements in the list');
+        });
       });
     });
   });
