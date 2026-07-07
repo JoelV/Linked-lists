@@ -43,7 +43,7 @@ describe('LinkedList', () => {
     });
     describe('when the linked list has one element', () => {
       it('should add a new node to the linked list', () => {
-        const subject = new LinkedList();
+        const subject = new LinkedList<number>();
         const result1 = subject.add(1);
         const result2 = subject.add(2);
 
@@ -57,7 +57,7 @@ describe('LinkedList', () => {
 
       describe('when linked list already has the same element', () => {
         it('should return false', () => {
-          const subject = new LinkedList();
+          const subject = new LinkedList<number>();
           const result1 = subject.add(1);
           const result2 = subject.add(1);
 
@@ -70,7 +70,7 @@ describe('LinkedList', () => {
         });
         describe('when the linked list has two element', () => {
           it('should add a new node to the linked list', () => {
-            const subject = new LinkedList();
+            const subject = new LinkedList<number>();
             subject.add(1);
             subject.add(2);
             subject.add(3);
@@ -86,7 +86,7 @@ describe('LinkedList', () => {
           describe('when there is no element in the list', () => {
             describe('when index is 0', () => {
               it('should add element', () => {
-                const subject = new LinkedList();
+                const subject = new LinkedList<number>();
                 subject.add(0, 1); 
                 const firstNode = (subject as any).head
                 expect(firstNode.value).toEqual(1)
@@ -96,7 +96,7 @@ describe('LinkedList', () => {
             });
             describe('when index is is out of range', () => {
               it('should throw and index out of bounds exception', () => {
-                const subject = new LinkedList();
+                const subject = new LinkedList<number>();
                 expect(() => subject.add(1, 1)).toThrow('IndexOutOfBoundsException');
               })
             })
