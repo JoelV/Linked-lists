@@ -7,7 +7,7 @@ export class LinkedList<T> {
 
   public add(v: T): boolean;
   public add(index: number, v: T): void;
-  public add(vOrIndex: T | number, v?: T): boolean {
+  public add(vOrIndex: T | number, v?: T): boolean | void {
     let index: number | undefined = undefined;
     if(arguments.length === 1) {
       v = vOrIndex as T;
@@ -16,14 +16,23 @@ export class LinkedList<T> {
       v = v as T
     }
 
-    if(index) {
+    if(index !== undefined) {
       if(index !== 0  && this.head === null) {
         throw new Error('IndexOutOfBoundsException');
       }
       if(!this.head) {
         this.head = new ListNode(v)
+        return ;
       }
+
+      const firstNode = this.head;
+      firstNode.previous = new ListNode(v);
+      firstNode.previous.next = firstNode;
+      this.head = firstNode.previous;
+
+      return ;
     }
+
     const node = new ListNode(v);
     if (!this.head) {
       this.head = node;

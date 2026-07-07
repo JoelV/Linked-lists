@@ -101,7 +101,23 @@ describe('LinkedList', () => {
               })
             })
           })
-          describe.todo('when there is one element in the list')
+          describe('when there is one element in the list', () => {
+            describe('when index is 0', () => {
+              it('should add element', () => {
+                const initialNode = new ListNode(1);
+                const subject = new LinkedList<number>();
+                (subject as any).head = initialNode;
+                subject.add(0, 2);
+                const firstNode = (subject as any).head
+                expect(firstNode.value).toEqual(2)
+                expect(firstNode.next.value).toEqual(1)
+                expect(firstNode.previous).toBeNull();
+                expect(initialNode.value).toEqual(1)
+                expect(initialNode.next).toBeNull();
+                expect(initialNode.previous?.value).toEqual(2);
+              });  
+            });  
+          })
           describe.todo('when there is two elements in the list')
           describe.todo('when there is three elements in the list')
         })
