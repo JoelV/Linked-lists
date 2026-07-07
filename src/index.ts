@@ -15,12 +15,7 @@ export class LinkedList<T> {
     }
 
     if (index !== undefined) {
-      let size = 0;
-      let node = this.head;
-      while (node !== null) {
-        size++;
-        node = node.next;
-      }
+      let size = this.size();
       if (index < 0 || index > size) {
         throw new Error('IndexOutOfBoundsException');
       }
@@ -61,6 +56,16 @@ export class LinkedList<T> {
     currentNode.next = node;
     node.previous = currentNode;
     return true;
+  }
+
+  private size(): number {
+    let size = 0;
+    let node = this.head;
+    while (node !== null) {
+      size++;
+      node = node.next;
+    }
+    return size;
   }
 
   public peakLast(): T | null {
