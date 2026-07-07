@@ -82,6 +82,19 @@ describe('LinkedList', () => {
             expect(secondNode.next.value).toEqual(3);
           });
         });
+        describe('when index is provided', () => {
+          describe('when there is no element in the list', () => {
+            describe('when index is 0', () => {
+              it('should add element', () => {
+                const subject = new LinkedList();
+                subject.add(0, 1);
+                const firstNode = (subject as any).head
+                expect(firstNode.value).toEqual(1)
+              })  
+            });
+            describe.todo('when index is is out of range')
+          })
+        })
       });
     });
   });

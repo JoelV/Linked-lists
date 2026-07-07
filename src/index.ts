@@ -5,7 +5,18 @@ export class LinkedList<T> {
 
   constructor() {}
 
-  public add(v: T): boolean {
+  public add(v: T): boolean;
+  public add(index: number, v: T): void;
+  public add(vOrIndex: T | number, v?: T): boolean {
+    let index: number | undefined = undefined;
+    if(arguments.length === 1) {
+      v = vOrIndex as T;
+    } else {
+      index = vOrIndex as number;
+      v = v as T
+    }
+
+
     const node = new ListNode(v);
     if (!this.head) {
       this.head = node;
