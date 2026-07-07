@@ -3,8 +3,6 @@ import { ListNode } from './list-node';
 export class LinkedList<T> {
   private head: ListNode<T> | null = null;
 
-  constructor() {}
-
   public add(v: T): boolean;
   public add(index: number, v: T): void;
   public add(vOrIndex: T | number, v?: T): boolean | void {
