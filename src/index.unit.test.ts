@@ -127,18 +127,33 @@ describe('LinkedList', () => {
                 expect(initialNode.previous).toBeNull();
               });
             });
-             describe('when index is is out of range', () => {
+            describe('when index is is out of range', () => {
               it('should throw and index out of bounds exception', () => {
                 const { subject } = arrangeLinkedListWithOneElement();
                 expect(() => subject.add(2, 2)).toThrow('IndexOutOfBoundsException');
-              })
-            })
+              });
+            });
           });
           describe('when there is two elements in the list', () => {
-            describe.todo('when index is 0')
-            describe.todo('when index is 1')
-            describe.todo('when index is 2')
-            describe.todo('when index is out of range')
+            describe('when index is 0', () => {
+              it.skip('should add element', () => {
+                const listNode = new ListNode(0, null, new ListNode(1))
+                const subject = new LinkedList<number>();
+                (subject as any).head = listNode;
+                subject.add(0, 2);
+                const firstNode = (subject as any).head;
+                expect(firstNode.value).toEqual(2);
+                expect(firstNode.previous).toBeNull();
+                expect(firstNode.next.value).toEqual(0);
+                expect(firstNode.next.previous.value).toEqual(2);
+                expect(firstNode.next.next.value).toEqual(1);
+                expect(firstNode.next.next.previous.value).toEqual(0);
+                expect(firstNode.next.next.next).toBeNull();
+              })
+            });
+            describe.todo('when index is 1');
+            describe.todo('when index is 2');
+            describe.todo('when index is out of range');
           });
           describe.todo('when there is three elements in the list');
         });
@@ -153,4 +168,3 @@ function arrangeLinkedListWithOneElement() {
   (subject as any).head = initialNode;
   return { subject, initialNode };
 }
-

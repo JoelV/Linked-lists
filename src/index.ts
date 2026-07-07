@@ -15,12 +15,16 @@ export class LinkedList<T> {
     }
 
     if (index !== undefined) {
-      if (index !== 0 && this.head === null) {
+      let size = 0;
+      let node = this.head;
+      while (node !== null) {
+        size++;
+        node = node.next;
+      }
+      if (index < 0 || index > size) {
         throw new Error('IndexOutOfBoundsException');
       }
-      if(index < 0 || index > 1) {
-        throw new Error('IndexOutOfBoundsException');
-      }
+
       if (!this.head) {
         this.head = new ListNode(v);
         return;
@@ -31,7 +35,7 @@ export class LinkedList<T> {
         firstNode.previous.next = firstNode;
         this.head = firstNode.previous;
       }
-      if(index === 1) {
+      if (index === 1) {
         const firstNode = this.head;
         firstNode.next = new ListNode(v);
         firstNode.next.previous = firstNode;
