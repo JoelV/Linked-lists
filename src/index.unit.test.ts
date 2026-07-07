@@ -137,12 +137,7 @@ describe('LinkedList', () => {
           describe('when there is two elements in the list', () => {
             describe('when index is 0', () => {
               it('should add element', () => {
-                const listNodeZero = new ListNode(0)
-                const listNodeOne = new ListNode(1)
-                listNodeZero.next = listNodeOne
-                listNodeOne.previous = listNodeZero
-                const subject = new LinkedList<number>();
-                (subject as any).head = listNodeZero;
+                const subject = arrangeLinkedListWithTwoNodes();
                 subject.add(0, 2);
                 const firstNode = (subject as any).head;
                 expect(firstNode.value).toEqual(2);
@@ -156,12 +151,7 @@ describe('LinkedList', () => {
             });
             describe('when index is 1', () => {
               it('should add element', () => {
-                const listNodeZero = new ListNode(0)
-                const listNodeOne = new ListNode(1)
-                listNodeZero.next = listNodeOne
-                listNodeOne.previous = listNodeZero
-                const subject = new LinkedList<number>();
-                (subject as any).head = listNodeZero;
+                const subject = arrangeLinkedListWithTwoNodes();
                 subject.add(1, 2);
                 const firstNode = (subject as any).head;
                 expect(firstNode.value).toEqual(0);
@@ -182,6 +172,16 @@ describe('LinkedList', () => {
     });
   });
 });
+
+function arrangeLinkedListWithTwoNodes() {
+  const listNodeZero = new ListNode(0);
+  const listNodeOne = new ListNode(1);
+  listNodeZero.next = listNodeOne;
+  listNodeOne.previous = listNodeZero;
+  const subject = new LinkedList<number>();
+  (subject as any).head = listNodeZero;
+  return subject;
+}
 
 function arrangeLinkedListWithOneElement() {
   const initialNode = new ListNode(1);
