@@ -17,6 +17,9 @@ export class LinkedList<T> {
     }
 
     if(index) {
+      if(index !== 0  && this.head === null) {
+        throw new Error('IndexOutOfBoundsException');
+      }
       if(!this.head) {
         this.head = new ListNode(v)
       }

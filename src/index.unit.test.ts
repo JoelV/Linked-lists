@@ -94,8 +94,12 @@ describe('LinkedList', () => {
                 expect(firstNode.previous).toBeNull();
               });  
             });
-
-            describe.todo('when index is is out of range')
+            describe('when index is is out of range', () => {
+              it('should throw and index out of bounds exception', () => {
+                const subject = new LinkedList();
+                expect(() => subject.add(1, 1)).toThrow('IndexOutOfBoundsException');
+              })
+            })
           })
         })
       });
