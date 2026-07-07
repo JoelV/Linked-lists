@@ -68,20 +68,20 @@ describe('LinkedList', () => {
           expect(result1).toEqual(true);
           expect(result2).toEqual(false);
         });
-      });
-    });
-    describe('when the linked list has two element', () => {
-      it('should add a new node to the linked list', () => {
-        const subject = new LinkedList();
-        subject.add(1);
-        subject.add(2);
-        subject.add(3);
-        expect(subject.peakLast()).toEqual(3);
-        expect((subject as any).head.value).toEqual(1);
-        const secondNode = (subject as any).head.next;
-        expect(secondNode.previous.value).toEqual(1);
-        expect(secondNode.value).toEqual(2);
-        expect(secondNode.next.value).toEqual(3);
+        describe('when the linked list has two element', () => {
+          it('should add a new node to the linked list', () => {
+            const subject = new LinkedList();
+            subject.add(1);
+            subject.add(2);
+            subject.add(3);
+            expect(subject.peakLast()).toEqual(3);
+            expect((subject as any).head.value).toEqual(1);
+            const secondNode = (subject as any).head.next;
+            expect(secondNode.previous.value).toEqual(1);
+            expect(secondNode.value).toEqual(2);
+            expect(secondNode.next.value).toEqual(3);
+          });
+        });
       });
     });
   });
