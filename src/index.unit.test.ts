@@ -90,8 +90,11 @@ describe('LinkedList', () => {
                 subject.add(0, 1);
                 const firstNode = (subject as any).head
                 expect(firstNode.value).toEqual(1)
-              })  
+                expect(firstNode.next).toBeNull();
+                expect(firstNode.previous).toBeNull();
+              });  
             });
+
             describe.todo('when index is is out of range')
           })
         })
