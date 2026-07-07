@@ -29,6 +29,7 @@ export class LinkedList<T> {
         firstNode.previous = new ListNode(v);
         firstNode.previous.next = firstNode;
         this.head = firstNode.previous;
+        return;
       }
       if (index === 1) {
         const firstNode = this.head;
@@ -41,7 +42,27 @@ export class LinkedList<T> {
           firstNode.next.next = nextNode;
           firstNode.next.previous = firstNode;
         }
+        return;
       }
+
+      let currentNode: ListNode<T> | null = this.head;
+      let previousNode: ListNode<T> | null = null
+      let currentIndex = 0;
+      while(currentNode !== null || currentIndex === index) {
+        currentIndex++;
+        if(currentNode === null) {
+          continue;
+        }
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+      }
+      if(previousNode === null) {
+        throw new Error('Impossible path')
+      }
+
+      if(currentNode === null) {
+        previousNode.next = new ListNode(v, previousNode)
+      } 
       return;
     }
 
