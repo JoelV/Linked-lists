@@ -16,7 +16,11 @@ export class LinkedList<T> {
       v = v as T
     }
 
-
+    if(index) {
+      if(!this.head) {
+        this.head = new ListNode(v)
+      }
+    }
     const node = new ListNode(v);
     if (!this.head) {
       this.head = node;
