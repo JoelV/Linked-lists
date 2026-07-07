@@ -147,7 +147,7 @@ describe('LinkedList', () => {
                 expect(firstNode.next.next.value).toEqual(1);
                 expect(firstNode.next.next.previous.value).toEqual(0);
                 expect(firstNode.next.next.next).toBeNull();
-              })
+              });
             });
             describe('when index is 1', () => {
               it('should add element', () => {
@@ -161,7 +161,7 @@ describe('LinkedList', () => {
                 expect(firstNode.next.next.value).toEqual(1);
                 expect(firstNode.next.next.previous.value).toEqual(2);
                 expect(firstNode.next.next.next).toBeNull();
-              })
+              });
             });
             describe.todo('when index is 2');
             describe.todo('when index is out of range');
