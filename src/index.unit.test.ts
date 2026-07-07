@@ -136,10 +136,13 @@ describe('LinkedList', () => {
           });
           describe('when there is two elements in the list', () => {
             describe('when index is 0', () => {
-              it.skip('should add element', () => {
-                const listNode = new ListNode(0, null, new ListNode(1))
+              it('should add element', () => {
+                const listNodeZero = new ListNode(0)
+                const listNodeOne = new ListNode(1)
+                listNodeZero.next = listNodeOne
+                listNodeOne.previous = listNodeZero
                 const subject = new LinkedList<number>();
-                (subject as any).head = listNode;
+                (subject as any).head = listNodeZero;
                 subject.add(0, 2);
                 const firstNode = (subject as any).head;
                 expect(firstNode.value).toEqual(2);
