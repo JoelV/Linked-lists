@@ -183,9 +183,32 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next).toBeNull();
             });
           });
-          describe.todo('when index is out of range');
+          describe('when index is out of range', () => {
+            it('should throw an index out of bounds exception', () => {
+              const subject = arrangeLinkedListWithTwoNodes();
+              expect(() => subject.add(5, 5)).toThrow('IndexOutOfBoundsException');
+            });
+          });
         });
-        describe.todo('when there is three elements in the list');
+        describe('when there is three elements in the list', () => {
+          describe('when index is 0', () => {
+            it('should add element', () => {
+              const subject = arrangeLinkedListWithThreeNodes();
+              subject.add(3, 3);
+              const firstNode = (subject as any).head;
+              expect(firstNode.value).toEqual(3);
+              expect(firstNode.next.value).toEqual(0);
+              expect(firstNode.next.previous).toEqual(3);
+              expect(firstNode.next.next.value).toEqual(1);
+              expect(firstNode.next.next.previous).toEqual(0);
+              expect(firstNode.next.next.next.value).toEqual(2);
+              expect(firstNode.next.next.next.previous).toEqual(1);
+              expect(firstNode.next.next.next.next).toBeNull();
+            });
+          });
+          describe.todo('when index is 1');
+          describe.todo('when index is 2');
+        });
       });
     });
   });
@@ -206,4 +229,17 @@ function arrangeLinkedListWithOneElement() {
   const subject = new LinkedList<number>();
   (subject as any).head = initialNode;
   return { subject, initialNode };
+}
+
+function arrangeLinkedListWithThreeNodes() {
+  const listNodeZero = new ListNode(0);
+  const listNodeOne = new ListNode(1);
+  const listNodeTwo = new ListNode(2);
+  listNodeZero.next = listNodeOne;
+  listNodeOne.previous = listNodeZero;
+  listNodeOne.next = listNodeTwo;
+  listNodeTwo.previous = listNodeOne;
+  const subject = new LinkedList<number>();
+  (subject as any).head = listNodeZero;
+  return subject;
 }
