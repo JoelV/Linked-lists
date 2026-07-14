@@ -105,23 +105,23 @@ describe('LinkedList', () => {
         describe('when there is one element in the list', () => {
           describe('when index is 0', () => {
             it('should add element', () => {
-              const { subject, initialNode } = arrangeLinkedListWithOneNode();
+              const subject = arrangeLinkedList(1);
               subject.add(0, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(2);
-              expect(firstNode.next.value).toEqual(1);
+              expect(firstNode.next.value).toEqual(0);
               expect(firstNode.previous).toBeNull();
-              expect(initialNode.value).toEqual(1);
-              expect(initialNode.next).toBeNull();
-              expect(initialNode.previous?.value).toEqual(2);
+              expect(firstNode.next.previous.value).toEqual(2);
+              expect(firstNode.next.next).toBeNull();
             });
           });
           describe('when index is 1', () => {
             it('should add element', () => {
-              const { subject, initialNode } = arrangeLinkedListWithOneNode();
+              const subject = arrangeLinkedList(1);
+              const initialNode = (subject as any).head;
               subject.add(1, 2);
               const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(1);
+              expect(firstNode.value).toEqual(0);
               expect(firstNode.next.value).toEqual(2);
               expect(firstNode.previous).toBeNull();
               expect(initialNode.next?.value).toEqual(2);
@@ -130,7 +130,7 @@ describe('LinkedList', () => {
           });
           describe('when index is is out of range', () => {
             it('should throw and index out of bounds exception', () => {
-              const { subject } = arrangeLinkedListWithOneNode();
+              const subject = arrangeLinkedList(1);
               expect(() => subject.add(2, 2)).toThrow('IndexOutOfBoundsException');
             });
           });
@@ -138,7 +138,7 @@ describe('LinkedList', () => {
         describe('when there is two elements in the list', () => {
           describe('when index is 0', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithTwoNodes();
+              const subject = arrangeLinkedList(2);
               subject.add(0, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(2);
@@ -152,7 +152,7 @@ describe('LinkedList', () => {
           });
           describe('when index is 1', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithTwoNodes();
+              const subject = arrangeLinkedList(2);
               subject.add(1, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(0);
@@ -185,7 +185,7 @@ describe('LinkedList', () => {
           });
           describe('when index is out of range', () => {
             it('should throw an index out of bounds exception', () => {
-              const subject = arrangeLinkedListWithTwoNodes();
+              const subject = arrangeLinkedList(2);
               expect(() => subject.add(5, 5)).toThrow('IndexOutOfBoundsException');
             });
           });
@@ -193,7 +193,7 @@ describe('LinkedList', () => {
         describe('when there is three elements in the list', () => {
           describe('when index is 0', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithThreeNodes();
+              const subject = arrangeLinkedList(3);
               subject.add(0, 3);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(3);
@@ -208,7 +208,7 @@ describe('LinkedList', () => {
           });
           describe('when index is 1', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithThreeNodes();
+              const subject = arrangeLinkedList(3);
               subject.add(1, 3);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(0);
@@ -219,11 +219,11 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next.value).toEqual(2);
               expect(firstNode.next.next.next.previous.value).toEqual(1);
               expect(firstNode.next.next.next.next).toBeNull();
-            });  
+            });
           });
           describe('when index is 2', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithThreeNodes();
+              const subject = arrangeLinkedList(3);
               subject.add(2, 3);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(0);
@@ -234,11 +234,11 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next.value).toEqual(2);
               expect(firstNode.next.next.next.previous.value).toEqual(3);
               expect(firstNode.next.next.next.next).toBeNull();
-            });    
+            });
           });
           describe('when index is 3', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithThreeNodes();
+              const subject = arrangeLinkedList(3);
               subject.add(3, 3);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(0);
@@ -249,13 +249,13 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next.value).toEqual(3);
               expect(firstNode.next.next.next.previous.value).toEqual(2);
               expect(firstNode.next.next.next.next).toBeNull();
-            });    
+            });
           });
           describe('when index is 4', () => {
             it('should add element', () => {
-              const subject = arrangeLinkedListWithThreeNodes();
+              const subject = arrangeLinkedList(3);
               expect(() => subject.add(4, 3)).toThrow('IndexOutOfBoundsException');
-            });    
+            });
           });
         });
       });
@@ -263,34 +263,20 @@ describe('LinkedList', () => {
   });
 });
 
-
-
-function arrangeLinkedListWithOneNode() {
-  const initialNode = new ListNode(1);
-  const subject = new LinkedList<number>();
-  (subject as any).head = initialNode;
-  return { subject, initialNode };
-}
-
-function arrangeLinkedListWithTwoNodes() {
-  const listNodeZero = new ListNode(0);
-  const listNodeOne = new ListNode(1);
-  listNodeZero.next = listNodeOne;
-  listNodeOne.previous = listNodeZero;
-  const subject = new LinkedList<number>();
-  (subject as any).head = listNodeZero;
-  return subject;
-}
-
-function arrangeLinkedListWithThreeNodes() {
-  const listNodeZero = new ListNode(0);
-  const listNodeOne = new ListNode(1);
-  const listNodeTwo = new ListNode(2);
-  listNodeZero.next = listNodeOne;
-  listNodeOne.previous = listNodeZero;
-  listNodeOne.next = listNodeTwo;
-  listNodeTwo.previous = listNodeOne;
-  const subject = new LinkedList<number>();
-  (subject as any).head = listNodeZero;
-  return subject;
+function arrangeLinkedList(numberOfNodes: number) {
+  const list = new LinkedList<number>();
+  for (let i = 0; i < numberOfNodes; i++) {
+    const node = new ListNode(i);
+    let currentNode = (list as any).head;
+    if (currentNode === null) {
+      (list as any).head = node;
+    } else {
+      while (currentNode.next !== null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = node;
+      node.previous = currentNode;
+    }
+  }
+  return list;
 }
