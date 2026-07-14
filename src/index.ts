@@ -102,6 +102,9 @@ export class LinkedList<T> {
     }
 
     if (index !== undefined) {
+      if (index < 0 || index > this.size()) {
+        throw new Error('IndexOutOfBoundsException');
+      }
       let firstNode: ListNode<T> | null = null;
       let currentNode: ListNode<T> | null = null;
       collection.forEach((v) => {
