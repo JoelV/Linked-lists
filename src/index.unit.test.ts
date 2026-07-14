@@ -423,9 +423,22 @@ class TestVector<T> implements Collection<T> {
   toArray(): Array<T>;
   toArray<U>(array: Array<U>): Array<U>;
   toArray<U>(_array?: Array<U>): Array<T> | Array<U> {
-    throw new Error('Not implemented');
+    if(arguments.length === 0) {
+      return this.data
+    }
+    throw new Error('Not implemented')
   }
   forEach(action: (value: T) => void) {
     this.data.forEach(action);
   }
 }
+
+describe('TestVector', () => {
+  describe('toArray', () => {
+    it('should return array', () => {
+      const vector = arrangeTestVector();
+      const result = vector.toArray();
+      expect(result).toEqual([0, 1, 2]);
+    });
+  });
+});
