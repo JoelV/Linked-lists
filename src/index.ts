@@ -24,7 +24,7 @@ export class LinkedList<T> {
     this.insertNodeAtIndexGreaterThanZero(index, v, firstNode);
   }
 
-  private insertNodeAtIndexGreaterThanZero(index: number, v: T, firstNode): void {
+  private insertNodeAtIndexGreaterThanZero(index: number, v: T, firstNode: ListNode<T>): void {
     const { previousNode, currentNode } = this.findPreviousAndCurrentNode(firstNode, index);
     if (currentNode === null) {
       previousNode.next = new ListNode(v, previousNode);
