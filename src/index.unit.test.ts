@@ -337,6 +337,14 @@ describe('LinkedList', () => {
             expect(firstNode.next.next.next).toBeNull();
           });
         });
+
+        describe('when index is 1', () => {
+          it('should should throw', () => {
+            const vector = arrangeTestVector();
+            const subject = arrangeLinkedList(0);
+            expect(() => subject.addAll(0, vector)).toThrow('IndexOutOfBoundsException');
+          });
+        });
       });
       describe.todo('when list has one element');
       describe.todo('when list has two elements');
