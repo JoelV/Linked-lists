@@ -118,14 +118,13 @@ describe('LinkedList', () => {
           describe('when index is 1', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(1);
-              const initialNode = (subject as any).head;
               subject.add(1, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(0);
               expect(firstNode.next.value).toEqual(2);
               expect(firstNode.previous).toBeNull();
-              expect(initialNode.next?.value).toEqual(2);
-              expect(initialNode.previous).toBeNull();
+              expect(firstNode.next.previous.value).toEqual(0);
+              expect(firstNode.next.next).toBeNull();
             });
           });
           describe('when index is is out of range', () => {
