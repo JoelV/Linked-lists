@@ -104,19 +104,29 @@ export class LinkedList<T> {
       if (index < 0 || index > this.size()) {
         throw new Error('IndexOutOfBoundsException');
       }
-      let firstNode: ListNode<T> | null = null;
-      let currentNode: ListNode<T> | null = null;
-      collection.forEach((v) => {
-        if (firstNode === null) {
-          firstNode = new ListNode(v);
-          currentNode = firstNode;
-        } else {
-          if (currentNode === null) throw new Error('can not end up here fix this at refactor');
-          currentNode.next = new ListNode(v, currentNode, null);
-          currentNode = currentNode.next;
-        }
-      });
-      this.head = firstNode;
+
+      const firstNode = this.head;
+      if (firstNode === null) {
+        let firstNode: ListNode<T> | null = null;
+        let currentNode: ListNode<T> | null = null;
+        collection.forEach((v) => {
+          if (firstNode === null) {
+            firstNode = new ListNode(v);
+            currentNode = firstNode;
+          } else {
+            if (currentNode === null) throw new Error('can not end up here fix this at refactor');
+            currentNode.next = new ListNode(v, currentNode, null);
+            currentNode = currentNode.next;
+          }
+        });
+        this.head = firstNode;
+        return true;
+      }
+
+      if (index === 0) {
+        // pick up here
+        return false;
+      }
       return true;
     }
 
