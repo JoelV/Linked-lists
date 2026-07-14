@@ -109,6 +109,7 @@ export class LinkedList<T> {
           firstNode = new ListNode(v);
           currentNode = firstNode;
         } else {
+          if (currentNode === null) throw new Error('can not end up here fix this at refactor');
           currentNode.next = new ListNode(v, currentNode, null);
           currentNode = currentNode.next;
         }
