@@ -322,7 +322,20 @@ describe('LinkedList', () => {
     describe('when index is specified', () => {
       describe('when list is empty', () => {
         describe('when index is 0', () => {
-          it.todo('should add all elements')
+          it('should add all elements', () => {
+            const vector = arrangeTestVector();
+            const subject = arrangeLinkedList(0);
+            const result = subject.addAll(0, vector);
+            expect(result).toEqual(true);
+            const firstNode = (subject as any).head;
+            expect(firstNode.value).toEqual(0);
+            expect(firstNode.previous).toBeNull();
+            expect(firstNode.next.value).toEqual(1);
+            expect(firstNode.next.previous.value).toEqual(0);
+            expect(firstNode.next.next.value).toEqual(2);
+            expect(firstNode.next.next.previous.value).toEqual(1);
+            expect(firstNode.next.next.next).toBeNull();
+          });
         });
       });
       describe.todo('when list has one element');
