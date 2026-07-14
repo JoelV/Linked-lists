@@ -342,7 +342,7 @@ describe('LinkedList', () => {
           it('should should throw', () => {
             const vector = arrangeTestVector();
             const subject = arrangeLinkedList(0);
-            expect(() => subject.addAll(0, vector)).toThrow('IndexOutOfBoundsException');
+            expect(() => subject.addAll(1, vector)).toThrow('IndexOutOfBoundsException');
           });
         });
       });
