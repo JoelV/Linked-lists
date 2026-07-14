@@ -102,6 +102,18 @@ export class LinkedList<T> {
     }
 
     if (index !== undefined) {
+      let firstNode: ListNode<T> | null = null;
+      let currentNode: ListNode<T> | null = null;
+      collection.forEach((v) => {
+        if (firstNode === null) {
+          firstNode = new ListNode(v);
+          currentNode = firstNode;
+        } else {
+          currentNode.next = new ListNode(v, currentNode, null);
+          currentNode = currentNode.next;
+        }
+      });
+      this.head = firstNode;
       return true;
     }
 
