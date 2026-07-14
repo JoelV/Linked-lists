@@ -346,7 +346,26 @@ describe('LinkedList', () => {
           });
         });
       });
-      describe.todo('when list has one element');
+      describe('when list has one element', () => {
+        describe('when index is 1', () => {
+          it('should add all the elements', () => {
+            const vector = arrangeTestVector();
+            const subject = arrangeLinkedList(1);
+            const result = subject.addAll(0, vector);
+            expect(result).toEqual(true);
+            const firstNode = (subject as any).head;
+            expect(firstNode.value).toEqual(0);
+            expect(firstNode.previous).toBeNull();
+            expect(firstNode.next.value).toEqual(0);
+            expect(firstNode.next.previous.value).toEqual(0);
+            expect(firstNode.next.next.value).toEqual(1);
+            expect(firstNode.next.next.previous.value).toEqual(0);
+            expect(firstNode.next.next.next.value).toEqual(2);  
+            expect(firstNode.next.next.next.previous.value).toEqual(1);  
+            expect(firstNode.next.next.next.next).toBeNull();
+          });
+        })
+      });
       describe.todo('when list has two elements');
     });
   });
