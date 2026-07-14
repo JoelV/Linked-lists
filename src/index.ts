@@ -62,7 +62,7 @@ export class LinkedList<T> {
       return true;
     }
     let currentNode = this.head;
-    
+
     while (currentNode?.next) {
       currentNode = currentNode.next;
     }
@@ -89,7 +89,22 @@ export class LinkedList<T> {
 
     return this.addToEnd(v);
   }
-  public addAll(collection: Collection<T>): boolean {
+
+  public addAll(collection: Collection<T>): boolean;
+  public addAll(index: number, collection: Collection<T>): boolean;
+  public addAll(collectionOrIndex: number | Collection<T>, collection?: Collection<T>): boolean {
+    let index: number | undefined = undefined;
+    if (arguments.length === 1) {
+      collection = collectionOrIndex as Collection<T>;
+    } else {
+      index = collectionOrIndex as number;
+      collection = collection as Collection<T>;
+    }
+
+    if (index !== undefined) {
+      return true;
+    }
+
     collection.forEach((v) => {
       this.addToEnd(v);
     });
