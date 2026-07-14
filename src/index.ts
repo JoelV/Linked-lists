@@ -1,3 +1,4 @@
+import { Collection } from './collection';
 import { ListNode } from './list-node';
 
 export class LinkedList<T> {
@@ -35,7 +36,10 @@ export class LinkedList<T> {
     }
   }
 
-  private findPreviousAndCurrentNode(firstNode: ListNode<T>, index: number): { previousNode: ListNode<T>; currentNode: ListNode<T> | null; } {
+  private findPreviousAndCurrentNode(
+    firstNode: ListNode<T>,
+    index: number,
+  ): { previousNode: ListNode<T>; currentNode: ListNode<T> | null } {
     let currentNode = firstNode.next;
     let previousNode = firstNode;
     let currentIndex = 1;
@@ -89,6 +93,12 @@ export class LinkedList<T> {
     }
 
     return this.addToEnd(v);
+  }
+  public addAll(collection: Collection<T>): boolean {
+    collection.forEach((v) => {
+      this.addToEnd(v);
+    });
+    return true;
   }
 
   private size(): number {

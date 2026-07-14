@@ -1,4 +1,5 @@
 import { LinkedList } from '.';
+import { Collection } from './collection';
 import { ListNode } from './list-node';
 
 describe('LinkedList', () => {
@@ -262,11 +263,51 @@ describe('LinkedList', () => {
   });
 
   describe('addAll', () => {
-    describe.todo('when list is empty')
-    describe.todo('when list has one element')
-    describe.todo('when list has two elements')
-  })
+    describe('when list is empty', () => {
+      it('should add all of the elements in the collection', () => {
+        const vector = arrangeTestVector();
+        const subject = arrangeLinkedList(0);
+        const result = subject.addAll(vector);
+        expect(result).toEqual(true);
+        const firstNode = (subject as any).head;
+        expect(firstNode.value).toEqual(0);
+        expect(firstNode.previous).toBeNull();
+        expect(firstNode.next.value).toEqual(1);
+        expect(firstNode.next.previous.value).toEqual(0);
+        expect(firstNode.next.next.value).toEqual(2);
+        expect(firstNode.next.next.previous.value).toEqual(1);
+        expect(firstNode.next.next.next).toBeNull();
+      });
+    });
+    describe('when list has one element', () => {
+      it.skip('should all the elements in the collection', () => {
+        const vector = arrangeTestVector();
+        const subject = arrangeLinkedList(1);
+        const result = subject.addAll(vector);
+        expect(result).toEqual(true);
+        const firstNode = (subject as any).head;
+        expect(firstNode.value).toEqual(0);
+        expect(firstNode.previous).toBeNull();
+        expect(firstNode.next.value).toEqual(0);
+        expect(firstNode.next.previous.value).toEqual(0);
+        expect(firstNode.next.next.value).toEqual(1);
+        expect(firstNode.next.next.previous.value).toEqual(0);
+        expect(firstNode.next.next.next.value).toEqual(2);
+        expect(firstNode.next.next.next.previous.value).toEqual(1);
+        expect(firstNode.next.next.next.next).toBeNull();
+      });
+    });
+    describe.todo('when list has two elements');
+  });
 });
+
+function arrangeTestVector() {
+  const vector = new TestVector<number>();
+  vector.add(0);
+  vector.add(1);
+  vector.add(2);
+  return vector;
+}
 
 function arrangeLinkedList(numberOfNodes: number) {
   const list = new LinkedList<number>();
@@ -284,4 +325,64 @@ function arrangeLinkedList(numberOfNodes: number) {
     }
   }
   return list;
+}
+
+class TestVector<T> implements Collection<T> {
+  public constructor(private data: Array<T> = []) {}
+  add(value: T): boolean {
+    this.data.push(value);
+    return true;
+  }
+  contains(_value: unknown): boolean {
+    throw new Error('Not implemented');
+  }
+
+  containsAll(_collection: Collection<unknown> | Iterable<unknown>): boolean {
+    throw new Error('Not implemented');
+  }
+
+  equals(_other: unknown): boolean {
+    throw new Error('Not implemented');
+  }
+
+  hashCode(): number {
+    throw new Error('Not implemented');
+  }
+
+  isEmpty(): boolean {
+    throw new Error('Not implemented');
+  }
+
+  iterator(): Iterator<T> {
+    throw new Error('Not implemented');
+  }
+
+  parallelStream(): Iterable<T> {
+    throw new Error('Not implemented');
+  }
+
+  removeIf(_filter: (value: T) => boolean): boolean {
+    throw new Error('Not implemented');
+  }
+
+  size(): number {
+    throw new Error('Not implemented');
+  }
+
+  spliterator(): IterableIterator<T> {
+    throw new Error('Not implemented');
+  }
+
+  stream(): Iterable<T> {
+    throw new Error('Not implemented');
+  }
+
+  toArray(): Array<T>;
+  toArray<U>(array: Array<U>): Array<U>;
+  toArray<U>(_array?: Array<U>): Array<T> | Array<U> {
+    throw new Error('Not implemented');
+  }
+  forEach(action: (value: T) => void) {
+    this.data.forEach(action);
+  }
 }
