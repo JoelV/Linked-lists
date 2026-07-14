@@ -57,17 +57,19 @@ describe('LinkedList', () => {
       });
 
       describe('when linked list already has the same element', () => {
-        it('should return false', () => {
+        it('should return true', () => {
           const subject = new LinkedList<number>();
           const result1 = subject.add(1);
           const result2 = subject.add(1);
 
-          expect(subject.peakLast()).toEqual(1);
-          expect((subject as any).head.value).toEqual(1);
-          expect((subject as any).head.next).toBeNull();
-          expect((subject as any).head.previous).toBeNull();
+          const firstNode = (subject as any).head;
+          expect(firstNode.value).toEqual(1);
+          expect(firstNode.previous).toBeNull();
+          expect(firstNode.next.value).toEqual(1);
+          expect(firstNode.next.previous.value).toEqual(1);
+          expect(firstNode.next.next).toBeNull();
           expect(result1).toEqual(true);
-          expect(result2).toEqual(false);
+          expect(result2).toEqual(true);
         });
       });
       describe('when the linked list has two elements', () => {

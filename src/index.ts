@@ -62,13 +62,8 @@ export class LinkedList<T> {
       return true;
     }
     let currentNode = this.head;
-    if (currentNode.value === v) {
-      return false;
-    }
+    
     while (currentNode?.next) {
-      if (currentNode.value === v) {
-        return false;
-      }
       currentNode = currentNode.next;
     }
     currentNode.next = node;
