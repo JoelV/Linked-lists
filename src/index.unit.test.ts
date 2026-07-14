@@ -251,6 +251,12 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next.next).toBeNull();
             });    
           });
+          describe('when index is 4', () => {
+            it('should add element', () => {
+              const subject = arrangeLinkedListWithThreeNodes();
+              expect(() => subject.add(4, 3)).toThrow('IndexOutOfBoundsException');
+            });    
+          });
         });
       });
     });
