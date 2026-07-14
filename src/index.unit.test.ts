@@ -282,7 +282,7 @@ describe('LinkedList', () => {
       });
     });
     describe('when list has one element', () => {
-      it.skip('should all the elements in the collection', () => {
+      it('should all the elements in the collection', () => {
         const vector = arrangeTestVector();
         const subject = arrangeLinkedList(1);
         const result = subject.addAll(vector);
