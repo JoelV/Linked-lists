@@ -124,8 +124,23 @@ export class LinkedList<T> {
       }
 
       if (index === 0) {
-        // pick up here
-        return false;
+        let currentNode: ListNode<T> | null = null;
+        let firstNodeOfVectorLinkedList: ListNode<T> | null = null;
+        collection.forEach((v) => {
+          if (currentNode === null) {
+            currentNode = new ListNode(v);
+            firstNodeOfVectorLinkedList = currentNode;
+          } else {
+            if (currentNode === null) throw new Error('can not end up here fix this at refactor');
+            currentNode.next = new ListNode(v, currentNode, null);
+            currentNode = currentNode.next;
+          }
+        });
+        if(currentNode === null) throw new Error('impossible refactor later')
+        firstNode.previous = currentNode;
+        (currentNode as ListNode<T>).next = firstNode;
+        this.head = firstNodeOfVectorLinkedList;
+        return true;
       }
       return true;
     }
