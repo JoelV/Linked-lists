@@ -5,8 +5,7 @@ export class LinkedList<T> {
   private head: ListNode<T> | null = null;
 
   private addNodeAt(index: number, v: T): void {
-    let size = this.size();
-    if (index < 0 || index > size) {
+    if (index < 0 || index > this.size()) {
       throw new Error('IndexOutOfBoundsException');
     }
 
