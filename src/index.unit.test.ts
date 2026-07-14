@@ -319,6 +319,15 @@ describe('LinkedList', () => {
         expect(firstNode.next.next.next.next.next).toBeNull();
       });
     });
+    describe('when index is specified', () => {
+      describe('when list is empty', () => {
+        describe('when index is 0', () => {
+          it.todo('should add all elements')
+        });
+      });
+      describe.todo('when list has one element');
+      describe.todo('when list has two elements');
+    });
   });
 });
 
