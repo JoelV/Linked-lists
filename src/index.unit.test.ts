@@ -299,7 +299,26 @@ describe('LinkedList', () => {
         expect(firstNode.next.next.next.next).toBeNull();
       });
     });
-    describe.todo('when list has two elements');
+    describe('when list has two elements', () => {
+      it('should all the elements in the collection', () => {
+        const vector = arrangeTestVector();
+        const subject = arrangeLinkedList(2);
+        const result = subject.addAll(vector);
+        expect(result).toEqual(true);
+        const firstNode = (subject as any).head;
+        expect(firstNode.value).toEqual(0);
+        expect(firstNode.previous).toBeNull();
+        expect(firstNode.next.value).toEqual(1);
+        expect(firstNode.next.previous.value).toEqual(0);
+        expect(firstNode.next.next.value).toEqual(0);
+        expect(firstNode.next.next.previous.value).toEqual(1);
+        expect(firstNode.next.next.next.value).toEqual(1);
+        expect(firstNode.next.next.next.previous.value).toEqual(0);
+        expect(firstNode.next.next.next.next.value).toEqual(2);
+        expect(firstNode.next.next.next.next.previous.value).toEqual(1);
+        expect(firstNode.next.next.next.next.next).toBeNull();
+      });
+    });
   });
 });
 
