@@ -105,7 +105,7 @@ describe('LinkedList', () => {
         describe('when there is one element in the list', () => {
           describe('when index is 0', () => {
             it('should add element', () => {
-              const { subject, initialNode } = arrangeLinkedListWithOneElement();
+              const { subject, initialNode } = arrangeLinkedListWithOneNode();
               subject.add(0, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(2);
@@ -118,7 +118,7 @@ describe('LinkedList', () => {
           });
           describe('when index is 1', () => {
             it('should add element', () => {
-              const { subject, initialNode } = arrangeLinkedListWithOneElement();
+              const { subject, initialNode } = arrangeLinkedListWithOneNode();
               subject.add(1, 2);
               const firstNode = (subject as any).head;
               expect(firstNode.value).toEqual(1);
@@ -130,7 +130,7 @@ describe('LinkedList', () => {
           });
           describe('when index is is out of range', () => {
             it('should throw and index out of bounds exception', () => {
-              const { subject } = arrangeLinkedListWithOneElement();
+              const { subject } = arrangeLinkedListWithOneNode();
               expect(() => subject.add(2, 2)).toThrow('IndexOutOfBoundsException');
             });
           });
@@ -263,6 +263,15 @@ describe('LinkedList', () => {
   });
 });
 
+
+
+function arrangeLinkedListWithOneNode() {
+  const initialNode = new ListNode(1);
+  const subject = new LinkedList<number>();
+  (subject as any).head = initialNode;
+  return { subject, initialNode };
+}
+
 function arrangeLinkedListWithTwoNodes() {
   const listNodeZero = new ListNode(0);
   const listNodeOne = new ListNode(1);
@@ -271,13 +280,6 @@ function arrangeLinkedListWithTwoNodes() {
   const subject = new LinkedList<number>();
   (subject as any).head = listNodeZero;
   return subject;
-}
-
-function arrangeLinkedListWithOneElement() {
-  const initialNode = new ListNode(1);
-  const subject = new LinkedList<number>();
-  (subject as any).head = initialNode;
-  return { subject, initialNode };
 }
 
 function arrangeLinkedListWithThreeNodes() {
