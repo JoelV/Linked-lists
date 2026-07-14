@@ -206,7 +206,21 @@ describe('LinkedList', () => {
               expect(firstNode.next.next.next.next).toBeNull();
             });
           });
-          describe.todo('when index is 1');
+          describe('when index is 1', () => {
+            it('should add element', () => {
+              const subject = arrangeLinkedListWithThreeNodes();
+              subject.add(1, 3);
+              const firstNode = (subject as any).head;
+              expect(firstNode.value).toEqual(0);
+              expect(firstNode.next.value).toEqual(3);
+              expect(firstNode.next.previous.value).toEqual(0);
+              expect(firstNode.next.next.value).toEqual(1);
+              expect(firstNode.next.next.previous.value).toEqual(3);
+              expect(firstNode.next.next.next.value).toEqual(2);
+              expect(firstNode.next.next.next.previous.value).toEqual(1);
+              expect(firstNode.next.next.next.next).toBeNull();
+            });  
+          });
           describe.todo('when index is 2');
         });
       });
