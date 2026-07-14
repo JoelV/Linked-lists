@@ -20,10 +20,22 @@ export class LinkedList<T> {
       this.head = firstNode.previous;
       return;
     }
+    const firstNode = this.head;
 
-    let currentNode: ListNode<T> | null = this.head;
-    let previousNode: ListNode<T> | null = null;
-    let currentIndex = 0;
+    const { previousNode, currentNode } = this.findPreviousAndCurrentNode(firstNode, index);
+    if (currentNode === null) {
+      previousNode.next = new ListNode(v, previousNode);
+    } else {
+      const newNode = new ListNode(v, previousNode, currentNode);
+      previousNode.next = newNode;
+      currentNode.previous = newNode;
+    }
+  }
+
+  private findPreviousAndCurrentNode(firstNode: ListNode<T>, index: number): { previousNode: ListNode<T>; currentNode: ListNode<T> | null; } {
+    let currentNode = firstNode.next;
+    let previousNode = firstNode;
+    let currentIndex = 1;
     while (currentNode !== null) {
       if (currentIndex === index) {
         break;
@@ -32,16 +44,8 @@ export class LinkedList<T> {
       previousNode = currentNode;
       currentNode = currentNode.next;
     }
-    if (previousNode === null) {
-      throw new Error('Impossible path');
-    }
-    if (currentNode === null) {
-      previousNode.next = new ListNode(v, previousNode);
-    } else {
-      const newNode = new ListNode(v, previousNode, currentNode);
-      previousNode.next = newNode;
-      currentNode.previous = newNode;
-    }
+
+    return { previousNode, currentNode };
   }
 
   private addToEnd(v: T): boolean {
