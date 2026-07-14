@@ -260,6 +260,12 @@ describe('LinkedList', () => {
       });
     });
   });
+
+  describe('addAll', () => {
+    describe.todo('when list is empty')
+    describe.todo('when list has one element')
+    describe.todo('when list has two elements')
+  })
 });
 
 function arrangeLinkedList(numberOfNodes: number) {
