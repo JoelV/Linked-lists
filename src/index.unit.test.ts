@@ -347,7 +347,7 @@ describe('LinkedList', () => {
         });
       });
       describe('when list has one element', () => {
-        describe('when index is 1', () => {
+        describe('when index is 0', () => {
           it('should add all the elements', () => {
             const vector = arrangeTestVector();
             const subject = arrangeLinkedList(1);
@@ -356,12 +356,12 @@ describe('LinkedList', () => {
             const firstNode = (subject as any).head;
             expect(firstNode.value).toEqual(0);
             expect(firstNode.previous).toBeNull();
-            expect(firstNode.next.value).toEqual(0);
+            expect(firstNode.next.value).toEqual(1);
             expect(firstNode.next.previous.value).toEqual(0);
-            expect(firstNode.next.next.value).toEqual(1);
-            expect(firstNode.next.next.previous.value).toEqual(0);
-            expect(firstNode.next.next.next.value).toEqual(2);  
-            expect(firstNode.next.next.next.previous.value).toEqual(1);  
+            expect(firstNode.next.next.value).toEqual(2);
+            expect(firstNode.next.next.previous.value).toEqual(1);
+            expect(firstNode.next.next.next.value).toEqual(0);  
+            expect(firstNode.next.next.next.previous.value).toEqual(2);  
             expect(firstNode.next.next.next.next).toBeNull();
           });
         })
