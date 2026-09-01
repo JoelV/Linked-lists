@@ -146,7 +146,7 @@ export class LinkedList<T> {
     return true;
   }
 
-  private extractCollectionAndIndex(collection: Collection<T> | undefined, collectionOrIndex: number | Collection<T>, outerArguements: Array<any>): { collection: Collection<T>; index?: number; } {
+  private extractCollectionAndIndex(collection: Collection<T> | undefined, collectionOrIndex: number | Collection<T>, outerArguements: IArguments): { collection: Collection<T>; index?: number; } {
     if (outerArguements.length === 1) {
       collection = collectionOrIndex as Collection<T>;
       return { collection: collectionOrIndex as Collection<T>, index: undefined}
