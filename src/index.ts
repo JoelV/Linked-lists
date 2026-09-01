@@ -92,13 +92,8 @@ export class LinkedList<T> {
   public addAll(collection: Collection<T>): boolean;
   public addAll(index: number, collection: Collection<T>): boolean;
   public addAll(collectionOrIndex: number | Collection<T>, collection?: Collection<T>): boolean {
-    let index: number | undefined = undefined;
-    if (arguments.length === 1) {
-      collection = collectionOrIndex as Collection<T>;
-    } else {
-      index = collectionOrIndex as number;
-      collection = collection as Collection<T>;
-    }
+    const { index, collection: c } = this.extractCollectionAndIndex(collection, collectionOrIndex, arguments);
+    collection = c;
 
     if (index !== undefined) {
       if (index < 0 || index > this.size()) {
@@ -149,6 +144,16 @@ export class LinkedList<T> {
       this.addToEnd(v);
     });
     return true;
+  }
+
+  private extractCollectionAndIndex(collection: Collection<T> | undefined, collectionOrIndex: number | Collection<T>, outerArguements: Array<any>): { collection: Collection<T>; index?: number; } {
+    if (outerArguements.length === 1) {
+      collection = collectionOrIndex as Collection<T>;
+      return { collection: collectionOrIndex as Collection<T>, index: undefined}
+    } else {
+      collection = collection as Collection<T>;
+      return { collection: collection as Collection<T>, index:collectionOrIndex as number }
+    }
   }
 
   private size(): number {
