@@ -131,20 +131,9 @@ export class LinkedList<T> {
     }
 
     if (index === 0) {
-      let currentNode: ListNode<T> | null = null;
-      let newFistNode: ListNode<T> | null = null;
-      collection.forEach((v) => {
-        if (currentNode === null) {
-          currentNode = new ListNode(v);
-          newFistNode = currentNode;
-        } else {
-          currentNode.next = new ListNode(v, currentNode, null);
-          currentNode = currentNode.next;
-        }
-      });
-      if (currentNode === null) throw new Error('impossible refactor later');
+      let { currentNode, newFistNode } = this.calculateNodesForWhenIndexIsZero(collection);
       firstNode.previous = currentNode;
-      (currentNode as ListNode<T>).next = firstNode;
+      currentNode.next = firstNode;
       this.head = newFistNode;
       return true;
     }
@@ -174,6 +163,30 @@ export class LinkedList<T> {
       currentNode.previous = previousNode;
     }
     return true;
+  }
+
+  private calculateNodesForWhenIndexIsZero(collection: Collection<T>): {
+    currentNode: ListNode<T>;
+    newFistNode: ListNode<T>;
+  } {
+    let currentNode: ListNode<T> | null = null;
+    let newFistNode: ListNode<T> | null = null;
+    collection.forEach((v) => {
+      if (currentNode === null) {
+        currentNode = new ListNode(v);
+        newFistNode = currentNode;
+        return;
+      }
+      currentNode.next = new ListNode(v, currentNode, null);
+      currentNode = currentNode.next;
+    });
+    if (currentNode === null) {
+      throw new Error('currentNode cannot be null, but TS wants me here');
+    }
+    if (newFistNode === null) {
+      throw new Error('newFistNode cannot be null, but TS wants me here');
+    }
+    return { currentNode, newFistNode };
   }
 
   private extractCollectionAndIndex(
