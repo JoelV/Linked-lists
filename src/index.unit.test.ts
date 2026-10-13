@@ -360,16 +360,44 @@ describe('LinkedList', () => {
             expect(firstNode.next.previous.value).toEqual(0);
             expect(firstNode.next.next.value).toEqual(2);
             expect(firstNode.next.next.previous.value).toEqual(1);
-            expect(firstNode.next.next.next.value).toEqual(0);  
-            expect(firstNode.next.next.next.previous.value).toEqual(2);  
+            expect(firstNode.next.next.next.value).toEqual(0);
+            expect(firstNode.next.next.next.previous.value).toEqual(2);
             expect(firstNode.next.next.next.next).toBeNull();
           });
-        })
+        });
       });
-      describe.todo('when list has two elements');
+      describe('when list has two elements', () => {
+        describe('when index is 0', () => {
+          it('should add all the elements', () => {
+            const vector = arrangeTestVector();
+            const subject = arrangeLinkedList(2);
+            const result = subject.addAll(0, vector);
+            expect(result).toEqual(true);
+            expect(getNodeAt(0, subject).previous).toBeNull();
+            expect(getNodeAt(0, subject).value).toEqual(0);
+            expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+            expect(getNodeAt(1, subject).value).toEqual(1);
+            expect(getNodeAt(2, subject).previous?.value).toEqual(1);
+            expect(getNodeAt(2, subject).value).toEqual(2);
+            expect(getNodeAt(3, subject).previous?.value).toEqual(2);
+            expect(getNodeAt(3, subject).value).toEqual(0);
+            expect(getNodeAt(4, subject).previous?.value).toEqual(0);
+            expect(getNodeAt(4, subject).value).toEqual(1);
+            expect(getNodeAt(5, subject)).toBeNull();
+          });
+        });
+      });
     });
   });
 });
+
+function getNodeAt<T>(index: number, list: LinkedList<T>): ListNode<T> {
+  let currentNode = (list as any).head;  
+  for(let i = 0; i < index; i++) {
+    currentNode = currentNode.next
+  }
+  return currentNode;
+}
 
 function arrangeTestVector() {
   const vector = new TestVector<number>();
@@ -450,10 +478,10 @@ class TestVector<T> implements Collection<T> {
   toArray(): Array<T>;
   toArray<U>(array: Array<U>): Array<U>;
   toArray<U>(_array?: Array<U>): Array<T> | Array<U> {
-    if(arguments.length === 0) {
-      return this.data
+    if (arguments.length === 0) {
+      return this.data;
     }
-    throw new Error('Not implemented')
+    throw new Error('Not implemented');
   }
   forEach(action: (value: T) => void) {
     this.data.forEach(action);
