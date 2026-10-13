@@ -11,7 +11,6 @@ describe('ListNode', () => {
       expect(subject.value).toEqual(1);
       expect(subject.next).toBeNull();
       expect(subject.previous).toBeNull();
-
     });
     describe('when created with previous', () => {
       it('should set value to previous', () => {
