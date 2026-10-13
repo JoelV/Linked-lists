@@ -131,10 +131,10 @@ export class LinkedList<T> {
     }
 
     if (index === 0) {
-      let { currentNode, newFistNode } = this.calculateNodesForWhenIndexIsZero(collection);
+      let { currentNode, newFirstNode } = this.calculateNodesForWhenIndexIsZero(collection);
       firstNode.previous = currentNode;
       currentNode.next = firstNode;
-      this.head = newFistNode;
+      this.head = newFirstNode;
       return true;
     }
 
@@ -167,14 +167,14 @@ export class LinkedList<T> {
 
   private calculateNodesForWhenIndexIsZero(collection: Collection<T>): {
     currentNode: ListNode<T>;
-    newFistNode: ListNode<T>;
+    newFirstNode: ListNode<T>;
   } {
     let currentNode: ListNode<T> | null = null;
-    let newFistNode: ListNode<T> | null = null;
+    let newFirstNode: ListNode<T> | null = null;
     collection.forEach((v) => {
       if (currentNode === null) {
         currentNode = new ListNode(v);
-        newFistNode = currentNode;
+        newFirstNode = currentNode;
         return;
       }
       currentNode.next = new ListNode(v, currentNode, null);
@@ -183,10 +183,10 @@ export class LinkedList<T> {
     if (currentNode === null) {
       throw new Error('currentNode cannot be null, but TS wants me here');
     }
-    if (newFistNode === null) {
+    if (newFirstNode === null) {
       throw new Error('newFistNode cannot be null, but TS wants me here');
     }
-    return { currentNode, newFistNode };
+    return { currentNode, newFirstNode };
   }
 
   private extractCollectionAndIndex(
