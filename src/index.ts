@@ -98,78 +98,79 @@ export class LinkedList<T> {
       arguments,
     );
     collection = c;
-    if (index !== undefined) {
-      if (index < 0 || index > this.size()) {
-        throw new Error('IndexOutOfBoundsException');
-      }
 
-      const firstNode = this.head;
-      if (firstNode === null) {
-        let firstNode: ListNode<T> | null = null;
-        let currentNode: ListNode<T> | null = null;
-        collection.forEach((v) => {
-          if (firstNode === null) {
-            firstNode = new ListNode(v);
-            currentNode = firstNode;
-          } else {
-            if (currentNode === null) throw new Error('can not end up here fix this at refactor');
-            currentNode.next = new ListNode(v, currentNode, null);
-            currentNode = currentNode.next;
-          }
-        });
-        this.head = firstNode;
-        return true;
-      }
-
-      if (index === 0) {
-        let currentNode: ListNode<T> | null = null;
-        let firstNodeOfVectorLinkedList: ListNode<T> | null = null;
-        collection.forEach((v) => {
-          if (currentNode === null) {
-            currentNode = new ListNode(v);
-            firstNodeOfVectorLinkedList = currentNode;
-          } else {
-            currentNode.next = new ListNode(v, currentNode, null);
-            currentNode = currentNode.next;
-          }
-        });
-        if (currentNode === null) throw new Error('impossible refactor later');
-        firstNode.previous = currentNode;
-        (currentNode as ListNode<T>).next = firstNode;
-        this.head = firstNodeOfVectorLinkedList;
-        return true;
-      }
-
-      // insert collection at the index
-      let currentNode: ListNode<T> | null = firstNode;
-      let previousNode: ListNode<T> | null = null;
-      for (let i = 1; i <= index; i++) {
-        previousNode = currentNode;
-        currentNode = currentNode?.next ?? null;
-      }
-
+    if (index === undefined) {
       collection.forEach((v) => {
-        const newNode = new ListNode(v, previousNode);
-        if (previousNode === null) {
-          throw new Error('previous Node is null but make this check will go away');
-        }
-        previousNode.next = newNode;
-        previousNode = newNode;
+        this.addToEnd(v);
       });
-
-      if (previousNode === null) {
-        throw new Error('previous Node is null but make this check will go away');
-      }
-      previousNode.next = currentNode;
-      if (currentNode !== null) {
-        currentNode.previous = previousNode;
-      }
       return true;
     }
 
+    if (index < 0 || index > this.size()) {
+      throw new Error('IndexOutOfBoundsException');
+    }
+
+    const firstNode = this.head;
+    if (firstNode === null) {
+      let firstNode: ListNode<T> | null = null;
+      let currentNode: ListNode<T> | null = null;
+      collection.forEach((v) => {
+        if (firstNode === null) {
+          firstNode = new ListNode(v);
+          currentNode = firstNode;
+        } else {
+          if (currentNode === null) throw new Error('can not end up here fix this at refactor');
+          currentNode.next = new ListNode(v, currentNode, null);
+          currentNode = currentNode.next;
+        }
+      });
+      this.head = firstNode;
+      return true;
+    }
+
+    if (index === 0) {
+      let currentNode: ListNode<T> | null = null;
+      let firstNodeOfVectorLinkedList: ListNode<T> | null = null;
+      collection.forEach((v) => {
+        if (currentNode === null) {
+          currentNode = new ListNode(v);
+          firstNodeOfVectorLinkedList = currentNode;
+        } else {
+          currentNode.next = new ListNode(v, currentNode, null);
+          currentNode = currentNode.next;
+        }
+      });
+      if (currentNode === null) throw new Error('impossible refactor later');
+      firstNode.previous = currentNode;
+      (currentNode as ListNode<T>).next = firstNode;
+      this.head = firstNodeOfVectorLinkedList;
+      return true;
+    }
+
+    // insert collection at the index
+    let currentNode: ListNode<T> | null = firstNode;
+    let previousNode: ListNode<T> | null = null;
+    for (let i = 1; i <= index; i++) {
+      previousNode = currentNode;
+      currentNode = currentNode?.next ?? null;
+    }
+
     collection.forEach((v) => {
-      this.addToEnd(v);
+      const newNode = new ListNode(v, previousNode);
+      if (previousNode === null) {
+        throw new Error('previous Node is null but make this check will go away');
+      }
+      previousNode.next = newNode;
+      previousNode = newNode;
     });
+
+    if (previousNode === null) {
+      throw new Error('previous Node is null but make this check will go away');
+    }
+    previousNode.next = currentNode;
+    if (currentNode !== null) {
+      currentNode.previous = previousNode;
+    }
     return true;
   }
 
