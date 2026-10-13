@@ -112,7 +112,8 @@ export class LinkedList<T> {
     }
 
     const firstNode = this.head;
-    if (firstNode === null) {
+    const isLinkedListEmpty = firstNode === null;
+    if (isLinkedListEmpty) {
       let firstNode: ListNode<T> | null = null;
       let currentNode: ListNode<T> | null = null;
       collection.forEach((v) => {
