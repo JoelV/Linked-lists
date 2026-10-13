@@ -405,6 +405,26 @@ describe('LinkedList', () => {
             expect(getNodeAt(5, subject)).toBeNull();
           });
         });
+
+        describe('when index is 2', () => {
+          it('should add all the elements', () => {
+            const vector = arrangeTestVector();
+            const subject = arrangeLinkedList(2);
+            const result = subject.addAll(2, vector);
+            expect(result).toEqual(true);
+            expect(getNodeAt(0, subject).previous).toBeNull();
+            expect(getNodeAt(0, subject).value).toEqual(0);
+            expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+            expect(getNodeAt(1, subject).value).toEqual(1);
+            expect(getNodeAt(2, subject).previous?.value).toEqual(1);
+            expect(getNodeAt(2, subject).value).toEqual(0);
+            expect(getNodeAt(3, subject).previous?.value).toEqual(0);
+            expect(getNodeAt(3, subject).value).toEqual(1);
+            expect(getNodeAt(4, subject).previous?.value).toEqual(1);
+            expect(getNodeAt(4, subject).value).toEqual(2);
+            expect(getNodeAt(5, subject)).toBeNull();
+          });
+        });
       });
     });
   });

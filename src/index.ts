@@ -141,28 +141,29 @@ export class LinkedList<T> {
       }
 
       // insert collection at the index
-      let currentNode = firstNode;
-      for (let i = 0; i <= index; i++) {
-        if (currentNode.next === null) {
-          break;
-        }
-        currentNode = currentNode.next;
+      let currentNode: ListNode<T> | null = firstNode;
+      let previousNode: ListNode<T> | null = null;
+      for (let i = 1; i <= index; i++) {
+        previousNode = currentNode;
+        currentNode = currentNode?.next ?? null;
       }
-      let previousNode = currentNode.previous;
+
       collection.forEach((v) => {
         const newNode = new ListNode(v, previousNode);
-        if(previousNode === null) {
-          throw new Error('previous Node is null but make this check will go away')
+        if (previousNode === null) {
+          throw new Error('previous Node is null but make this check will go away');
         }
         previousNode.next = newNode;
         previousNode = newNode;
       });
 
-      if(previousNode === null) {
-        throw new Error('previous Node is null but make this check will go away')
+      if (previousNode === null) {
+        throw new Error('previous Node is null but make this check will go away');
       }
       previousNode.next = currentNode;
-      currentNode.previous = previousNode;
+      if (currentNode !== null) {
+        currentNode.previous = previousNode;
+      }
       return true;
     }
 
