@@ -99,7 +99,8 @@ export class LinkedList<T> {
     );
     collection = c;
 
-    if (index === undefined) {
+    const isAddAllCalledWithOnlyCollection = index === undefined;
+    if (isAddAllCalledWithOnlyCollection) {
       collection.forEach((v) => {
         this.addToEnd(v);
       });
