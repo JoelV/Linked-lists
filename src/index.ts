@@ -92,9 +92,12 @@ export class LinkedList<T> {
   public addAll(collection: Collection<T>): boolean;
   public addAll(index: number, collection: Collection<T>): boolean;
   public addAll(collectionOrIndex: number | Collection<T>, collection?: Collection<T>): boolean {
-    const { index, collection: c } = this.extractCollectionAndIndex(collection, collectionOrIndex, arguments);
+    const { index, collection: c } = this.extractCollectionAndIndex(
+      collection,
+      collectionOrIndex,
+      arguments,
+    );
     collection = c;
-
     if (index !== undefined) {
       if (index < 0 || index > this.size()) {
         throw new Error('IndexOutOfBoundsException');
@@ -131,12 +134,36 @@ export class LinkedList<T> {
             currentNode = currentNode.next;
           }
         });
-        if(currentNode === null) throw new Error('impossible refactor later')
+        if (currentNode === null) throw new Error('impossible refactor later');
         firstNode.previous = currentNode;
         (currentNode as ListNode<T>).next = firstNode;
         this.head = firstNodeOfVectorLinkedList;
         return true;
       }
+
+      // insert collection at the index
+      let currentNode = firstNode;
+      for (let i = 0; i <= index; i++) {
+        if (currentNode.next === null) {
+          break;
+        }
+        currentNode = currentNode.next;
+      }
+      let previousNode = currentNode.previous;
+      collection.forEach((v) => {
+        const newNode = new ListNode(v, previousNode);
+        if(previousNode === null) {
+          throw new Error('previous Node is null but make this check will go away')
+        }
+        previousNode.next = newNode;
+        previousNode = newNode;
+      });
+
+      if(previousNode === null) {
+        throw new Error('previous Node is null but make this check will go away')
+      }
+      previousNode.next = currentNode;
+      currentNode.previous = previousNode;
       return true;
     }
 
@@ -146,13 +173,17 @@ export class LinkedList<T> {
     return true;
   }
 
-  private extractCollectionAndIndex(collection: Collection<T> | undefined, collectionOrIndex: number | Collection<T>, outerArguements: IArguments): { collection: Collection<T>; index?: number; } {
+  private extractCollectionAndIndex(
+    collection: Collection<T> | undefined,
+    collectionOrIndex: number | Collection<T>,
+    outerArguements: IArguments,
+  ): { collection: Collection<T>; index?: number } {
     if (outerArguements.length === 1) {
       collection = collectionOrIndex as Collection<T>;
-      return { collection: collectionOrIndex as Collection<T>, index: undefined}
+      return { collection: collectionOrIndex as Collection<T>, index: undefined };
     } else {
       collection = collection as Collection<T>;
-      return { collection: collection as Collection<T>, index:collectionOrIndex as number }
+      return { collection: collection as Collection<T>, index: collectionOrIndex as number };
     }
   }
 
