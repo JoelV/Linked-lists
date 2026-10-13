@@ -129,7 +129,6 @@ export class LinkedList<T> {
             currentNode = new ListNode(v);
             firstNodeOfVectorLinkedList = currentNode;
           } else {
-            if (currentNode === null) throw new Error('can not end up here fix this at refactor');
             currentNode.next = new ListNode(v, currentNode, null);
             currentNode = currentNode.next;
           }
