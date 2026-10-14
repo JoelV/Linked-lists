@@ -98,6 +98,9 @@ export class LinkedList<T> {
       arguments,
     );
     collection = c;
+    if (collection.isEmpty()) {
+      return true;
+    }
 
     const isAddAllCalledWithOnlyCollection = index === undefined;
     if (isAddAllCalledWithOnlyCollection) {
@@ -169,23 +172,15 @@ export class LinkedList<T> {
     currentNode: ListNode<T>;
     newFirstNode: ListNode<T>;
   } {
-    let currentNode: ListNode<T> | null = null;
-    let newFirstNode: ListNode<T> | null = null;
-    collection.forEach((v) => {
-      if (currentNode === null) {
-        currentNode = new ListNode(v);
-        newFirstNode = currentNode;
-        return;
-      }
-      currentNode.next = new ListNode(v, currentNode, null);
+    const [first, ...rest] = collection;
+    let currentNode = new ListNode(first);
+    const newFirstNode = currentNode;
+
+    for (const r of rest) {
+      currentNode.next = new ListNode(r, currentNode, null);
       currentNode = currentNode.next;
-    });
-    if (currentNode === null) {
-      throw new Error('currentNode cannot be null, but TS wants me here');
     }
-    if (newFirstNode === null) {
-      throw new Error('newFistNode cannot be null, but TS wants me here');
-    }
+
     return { currentNode, newFirstNode };
   }
 

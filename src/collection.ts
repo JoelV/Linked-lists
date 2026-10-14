@@ -19,4 +19,5 @@ export interface Collection<T> {
   toArray(): Array<T>;
   toArray<U>(array: Array<U>): Array<U>;
   forEach(action: (v: T) => void): void;
+  [Symbol.iterator](): Iterator<T>;
 }

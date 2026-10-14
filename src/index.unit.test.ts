@@ -443,11 +443,11 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(0);
             expect(getNodeAt(4, subject).previous?.value).toEqual(0);
             expect(getNodeAt(4, subject).value).toEqual(1);
-            expect(getNodeAt(5, subject).previous?.value).toEqual(1)
+            expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
             expect(getNodeAt(6, subject)).toBeNull();
-          })
-        })
+          });
+        });
         describe('when index is 1', () => {
           it('should add all the elements', () => {
             const vector = arrangeTestVector();
@@ -464,11 +464,11 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(2);
             expect(getNodeAt(4, subject).previous?.value).toEqual(2);
             expect(getNodeAt(4, subject).value).toEqual(1);
-            expect(getNodeAt(5, subject).previous?.value).toEqual(1)
+            expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
             expect(getNodeAt(6, subject)).toBeNull();
-          })
-        })
+          });
+        });
         describe('when index is 3', () => {
           it('should add all the elements', () => {
             const vector = arrangeTestVector();
@@ -485,12 +485,12 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(0);
             expect(getNodeAt(4, subject).previous?.value).toEqual(0);
             expect(getNodeAt(4, subject).value).toEqual(1);
-            expect(getNodeAt(5, subject).previous?.value).toEqual(1)
+            expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
             expect(getNodeAt(6, subject)).toBeNull();
-          })
-        })
-         describe('when index is 2', () => {
+          });
+        });
+        describe('when index is 2', () => {
           it('should add all the elements', () => {
             const vector = arrangeTestVector();
             const subject = arrangeLinkedList(3);
@@ -506,24 +506,23 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(1);
             expect(getNodeAt(4, subject).previous?.value).toEqual(1);
             expect(getNodeAt(4, subject).value).toEqual(2);
-            expect(getNodeAt(5, subject).previous?.value).toEqual(2)
+            expect(getNodeAt(5, subject).previous?.value).toEqual(2);
             expect(getNodeAt(5, subject).value).toEqual(2);
             expect(getNodeAt(6, subject)).toBeNull();
-          })
-        })
-      })
+          });
+        });
+      });
       describe('when collection has no elements', () => {
         it('should not change the list', () => {
-          const subject = arrangeLinkedList(3)
+          const subject = arrangeLinkedList(3);
           const vector = new TestVector<number>();
           subject.addAll(0, vector);
-          expect(getNodeAt(0, subject).value).toEqual(0)
-          expect(getNodeAt(1, subject).value).toEqual(1)
-          expect(getNodeAt(2, subject).value).toEqual(2)
-
-        })
-      })
-      describe.todo('when index bigger than the bound of the linked list size')
+          expect(getNodeAt(0, subject).value).toEqual(0);
+          expect(getNodeAt(1, subject).value).toEqual(1);
+          expect(getNodeAt(2, subject).value).toEqual(2);
+        });
+      });
+      describe.todo('when index bigger than the bound of the linked list size');
     });
   });
 });
@@ -585,7 +584,7 @@ class TestVector<T> implements Collection<T> {
   }
 
   isEmpty(): boolean {
-    throw new Error('Not implemented');
+    return this.data.length === 0;
   }
 
   iterator(): Iterator<T> {
@@ -622,6 +621,18 @@ class TestVector<T> implements Collection<T> {
   }
   forEach(action: (value: T) => void) {
     this.data.forEach(action);
+  }
+
+  [Symbol.iterator](): Iterator<T> {
+    let index = 0;
+    return {
+      next: () => {
+        if (index >= this.data.length) {
+          return { done: true, value: undefined };
+        }
+        return { value: this.data[index++], done: false };
+      },
+    };
   }
 }
 
