@@ -512,7 +512,17 @@ describe('LinkedList', () => {
           })
         })
       })
-      describe.todo('when collection has no elements')
+      describe('when collection has no elements', () => {
+        it('should not change the list', () => {
+          const subject = arrangeLinkedList(3)
+          const vector = new TestVector<number>();
+          subject.addAll(0, vector);
+          expect(getNodeAt(0, subject).value).toEqual(0)
+          expect(getNodeAt(1, subject).value).toEqual(1)
+          expect(getNodeAt(2, subject).value).toEqual(2)
+
+        })
+      })
       describe.todo('when index bigger than the bound of the linked list size')
     });
   });
