@@ -426,6 +426,8 @@ describe('LinkedList', () => {
           });
         });
       });
+      describe.todo('when collection has no elements')
+      describe.todo('when index bigger than the bound of the linked list size')
     });
   });
 });
