@@ -142,12 +142,11 @@ export class LinkedList<T> {
     }
 
     // insert collection at the index
-    let currentNode: ListNode<T> | null = firstNode;
-    let previousNode: ListNode<T> | null = null;
-    for (let i = 1; i <= index; i++) {
-      previousNode = currentNode;
-      currentNode = currentNode?.next ?? null;
-    }
+    let {
+      previousNode,
+      currentNode,
+    }: { previousNode: ListNode<T> | null; currentNode: ListNode<T> | null } =
+      this.calculateNodesBasedOnIndex(firstNode, index);
 
     collection.forEach((v) => {
       const newNode = new ListNode(v, previousNode);
@@ -166,6 +165,19 @@ export class LinkedList<T> {
       currentNode.previous = previousNode;
     }
     return true;
+  }
+
+  private calculateNodesBasedOnIndex(
+    firstNode: ListNode<T>,
+    index: number,
+  ): { previousNode: ListNode<T> | null; currentNode: ListNode<T> | null } {
+    let currentNode: ListNode<T> | null = firstNode;
+    let previousNode: ListNode<T> | null = null;
+    for (let i = 1; i <= index; i++) {
+      previousNode = currentNode;
+      currentNode = currentNode?.next ?? null;
+    }
+    return { previousNode, currentNode };
   }
 
   private calculateNodesForWhenIndexIsZero(collection: Collection<T>): {
