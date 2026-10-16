@@ -142,24 +142,14 @@ export class LinkedList<T> {
     }
 
     // insert collection at the index
-    let {
-      previousNode,
-      currentNode,
-    }: { previousNode: ListNode<T> | null; currentNode: ListNode<T> | null } =
-      this.calculateNodesBasedOnIndex(firstNode, index);
+    let { previousNode, currentNode } = this.calculateNodesBasedOnIndex(firstNode, index);
 
     collection.forEach((v) => {
       const newNode = new ListNode(v, previousNode);
-      if (previousNode === null) {
-        throw new Error('previous Node is null but make this check will go away');
-      }
       previousNode.next = newNode;
       previousNode = newNode;
     });
 
-    if (previousNode === null) {
-      throw new Error('previous Node is null but make this check will go away');
-    }
     previousNode.next = currentNode;
     if (currentNode !== null) {
       currentNode.previous = previousNode;
@@ -170,12 +160,15 @@ export class LinkedList<T> {
   private calculateNodesBasedOnIndex(
     firstNode: ListNode<T>,
     index: number,
-  ): { previousNode: ListNode<T> | null; currentNode: ListNode<T> | null } {
+  ): { previousNode: ListNode<T>; currentNode: ListNode<T> | null } {
     let currentNode: ListNode<T> | null = firstNode;
-    let previousNode: ListNode<T> | null = null;
+    let previousNode = firstNode;
     for (let i = 1; i <= index; i++) {
+      if (currentNode === null) {
+        break;
+      }
       previousNode = currentNode;
-      currentNode = currentNode?.next ?? null;
+      currentNode = currentNode.next;
     }
     return { previousNode, currentNode };
   }
