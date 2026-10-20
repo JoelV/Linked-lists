@@ -588,7 +588,7 @@ class TestVector<T> implements Collection<T> {
   }
 
   iterator(): Iterator<T> {
-    throw new Error('Not implemented');
+    return this[Symbol.iterator]();
   }
 
   parallelStream(): Iterable<T> {
