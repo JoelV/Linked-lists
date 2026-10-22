@@ -619,14 +619,14 @@ class TestVector<T> implements Collection<T> {
     }
     throw new Error('Not implemented');
   }
-  forEach(action: (value: T) => void) {
+  forEach(action: (value: T) => void): void {
     this.data.forEach(action);
   }
 
   [Symbol.iterator](): Iterator<T> {
     let index = 0;
     return {
-      next: () => {
+      next: (): IteratorResult<T> => {
         if (index >= this.data.length) {
           return { done: true, value: undefined };
         }
