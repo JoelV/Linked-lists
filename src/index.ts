@@ -78,7 +78,7 @@ export class LinkedList<T> {
       v = vOrIndex as T;
     } else {
       index = vOrIndex as number;
-      v = v as T;
+      v = v;
     }
 
     if (index !== undefined) {
@@ -134,7 +134,7 @@ export class LinkedList<T> {
     }
 
     if (index === 0) {
-      let { currentNode, newFirstNode } = this.calculateNodesForWhenIndexIsZero(collection);
+      const { currentNode, newFirstNode } = this.calculateNodesForWhenIndexIsZero(collection);
       firstNode.previous = currentNode;
       currentNode.next = firstNode;
       this.head = newFirstNode;
@@ -198,8 +198,8 @@ export class LinkedList<T> {
       collection = collectionOrIndex as Collection<T>;
       return { collection: collectionOrIndex as Collection<T>, index: undefined };
     } else {
-      collection = collection as Collection<T>;
-      return { collection: collection as Collection<T>, index: collectionOrIndex as number };
+      collection = collection;
+      return { collection: collection, index: collectionOrIndex as number };
     }
   }
 
