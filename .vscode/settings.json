@@ -11,5 +11,7 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.configPath": ".prettierrc.json"
+  "prettier.configPath": ".prettierrc.json",
+  "eslint.useFlatConfig": true,
+  "eslint.validate": ["javascript", "typescript"]
 }
