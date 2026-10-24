@@ -543,13 +543,13 @@ function arrangeTestVector() {
   return vector;
 }
 
-function arrangeLinkedList(numberOfNodes: number) {
+function arrangeLinkedList(numberOfNodes: number): LinkedList<number> {
   const list = new LinkedList<number>();
   for (let i = 0; i < numberOfNodes; i++) {
     const node = new ListNode(i);
-    let currentNode = (list as any).head;
+    let currentNode = list['head'];
     if (currentNode === null) {
-      (list as any).head = node;
+      list['head'] = node;
     } else {
       while (currentNode.next !== null) {
         currentNode = currentNode.next;
