@@ -535,7 +535,7 @@ function getNodeAt<T>(index: number, list: LinkedList<T>): ListNode<T> {
   return currentNode;
 }
 
-function arrangeTestVector() {
+function arrangeTestVector(): TestVector<number> {
   const vector = new TestVector<number>();
   vector.add(0);
   vector.add(1);
