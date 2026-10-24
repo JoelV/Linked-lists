@@ -383,7 +383,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(0);
             expect(getNodeAt(4, subject).previous?.value).toEqual(0);
             expect(getNodeAt(4, subject).value).toEqual(1);
-            expect(getNodeAt(5, subject)).toBeNull();
+            expect(getNodeAt(4, subject).next).toBeNull();
           });
         });
         describe('when index is 1', () => {
@@ -402,7 +402,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(2);
             expect(getNodeAt(4, subject).previous?.value).toEqual(2);
             expect(getNodeAt(4, subject).value).toEqual(1);
-            expect(getNodeAt(5, subject)).toBeNull();
+            expect(getNodeAt(4, subject).next).toBeNull();
           });
         });
 
@@ -422,7 +422,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(3, subject).value).toEqual(1);
             expect(getNodeAt(4, subject).previous?.value).toEqual(1);
             expect(getNodeAt(4, subject).value).toEqual(2);
-            expect(getNodeAt(5, subject)).toBeNull();
+            expect(getNodeAt(4, subject).next).toBeNull();
           });
         });
       });
@@ -445,7 +445,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(4, subject).value).toEqual(1);
             expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
-            expect(getNodeAt(6, subject)).toBeNull();
+            expect(getNodeAt(5, subject).next).toBeNull();
           });
         });
         describe('when index is 1', () => {
@@ -466,7 +466,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(4, subject).value).toEqual(1);
             expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
-            expect(getNodeAt(6, subject)).toBeNull();
+            expect(getNodeAt(5, subject).next).toBeNull();
           });
         });
         describe('when index is 3', () => {
@@ -487,7 +487,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(4, subject).value).toEqual(1);
             expect(getNodeAt(5, subject).previous?.value).toEqual(1);
             expect(getNodeAt(5, subject).value).toEqual(2);
-            expect(getNodeAt(6, subject)).toBeNull();
+            expect(getNodeAt(5, subject).next).toBeNull();
           });
         });
         describe('when index is 2', () => {
@@ -508,7 +508,7 @@ describe('LinkedList', () => {
             expect(getNodeAt(4, subject).value).toEqual(2);
             expect(getNodeAt(5, subject).previous?.value).toEqual(2);
             expect(getNodeAt(5, subject).value).toEqual(2);
-            expect(getNodeAt(6, subject)).toBeNull();
+            expect(getNodeAt(5, subject).next).toBeNull();
           });
         });
       });
@@ -528,9 +528,15 @@ describe('LinkedList', () => {
 });
 
 function getNodeAt<T>(index: number, list: LinkedList<T>): ListNode<T> {
-  let currentNode = (list as any).head;
+  let currentNode = list['head'];
+  if(currentNode === null) {
+    throw new Error('getNodeAt: out of bounds exception')  
+  }
   for (let i = 0; i < index; i++) {
-    currentNode = currentNode.next;
+    if(currentNode?.next === null)  {
+      throw new Error('getNodeAt: out of bounds exception')  
+    }
+    currentNode = currentNode?.next;
   }
   return currentNode;
 }
