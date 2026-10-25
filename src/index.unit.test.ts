@@ -213,12 +213,12 @@ describe('LinkedList', () => {
               const subject = arrangeLinkedList(3);
               subject.add(1, 3);
               expect(getNodeAt(0, subject).value).toEqual(0);
-              expect(getNodeAt(1, subject).value).toEqual(3);
               expect(getNodeAt(1, subject).previous?.value).toEqual(0);
-              expect(getNodeAt(2, subject).value).toEqual(1);
+              expect(getNodeAt(1, subject).value).toEqual(3);
               expect(getNodeAt(2, subject).previous?.value).toEqual(3);
-              expect(getNodeAt(3, subject).value).toEqual(2);
+              expect(getNodeAt(2, subject).value).toEqual(1);
               expect(getNodeAt(3, subject).previous?.value).toEqual(1);
+              expect(getNodeAt(3, subject).value).toEqual(2);
               expect(getNodeAt(3, subject).next).toBeNull();
             });
           });
