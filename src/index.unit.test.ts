@@ -49,9 +49,8 @@ describe('LinkedList', () => {
         const result2 = subject.add(2);
 
         expect(subject.peakLast()).toEqual(2);
-        expect((subject as any).head.value).toEqual(1);
-        const secondNode = (subject as any).head.next;
-        expect(secondNode.previous.value).toEqual(1);
+        expect(getNodeAt(0, subject).value).toEqual(1);
+        expect(getNodeAt(1, subject).previous?.value).toEqual(1);
         expect(result1).toEqual(true);
         expect(result2).toEqual(true);
       });
@@ -62,12 +61,11 @@ describe('LinkedList', () => {
           const result1 = subject.add(1);
           const result2 = subject.add(1);
 
-          const firstNode = (subject as any).head;
-          expect(firstNode.value).toEqual(1);
-          expect(firstNode.previous).toBeNull();
-          expect(firstNode.next.value).toEqual(1);
-          expect(firstNode.next.previous.value).toEqual(1);
-          expect(firstNode.next.next).toBeNull();
+          expect(getNodeAt(0, subject).value).toEqual(1);
+          expect(getNodeAt(0, subject).previous).toBeNull();
+          expect(getNodeAt(1, subject).value).toEqual(1);
+          expect(getNodeAt(1, subject).previous?.value).toEqual(1);
+          expect(getNodeAt(1, subject).next).toBeNull();
           expect(result1).toEqual(true);
           expect(result2).toEqual(true);
         });
@@ -79,11 +77,10 @@ describe('LinkedList', () => {
           subject.add(2);
           subject.add(3);
           expect(subject.peakLast()).toEqual(3);
-          expect((subject as any).head.value).toEqual(1);
-          const secondNode = (subject as any).head.next;
-          expect(secondNode.previous.value).toEqual(1);
-          expect(secondNode.value).toEqual(2);
-          expect(secondNode.next.value).toEqual(3);
+          expect(getNodeAt(0, subject).value).toEqual(1);
+          expect(getNodeAt(1, subject).previous?.value).toEqual(1);
+          expect(getNodeAt(1, subject).value).toEqual(2);
+          expect(getNodeAt(2, subject).value).toEqual(3);
         });
       });
       describe('when index is provided', () => {
@@ -92,10 +89,9 @@ describe('LinkedList', () => {
             it('should add element', () => {
               const subject = new LinkedList<number>();
               subject.add(0, 1);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(1);
-              expect(firstNode.next).toBeNull();
-              expect(firstNode.previous).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(1);
+              expect(getNodeAt(0, subject).next).toBeNull();
+              expect(getNodeAt(0, subject).previous).toBeNull();
             });
           });
           describe('when index is is out of range', () => {
@@ -110,24 +106,22 @@ describe('LinkedList', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(1);
               subject.add(0, 2);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(2);
-              expect(firstNode.next.value).toEqual(0);
-              expect(firstNode.previous).toBeNull();
-              expect(firstNode.next.previous.value).toEqual(2);
-              expect(firstNode.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(2);
+              expect(getNodeAt(1, subject).value).toEqual(0);
+              expect(getNodeAt(0, subject).previous).toBeNull();
+              expect(getNodeAt(1, subject).previous?.value).toEqual(2);
+              expect(getNodeAt(1, subject).next).toBeNull();
             });
           });
           describe('when index is 1', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(1);
               subject.add(1, 2);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(0);
-              expect(firstNode.next.value).toEqual(2);
-              expect(firstNode.previous).toBeNull();
-              expect(firstNode.next.previous.value).toEqual(0);
-              expect(firstNode.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(0);
+              expect(getNodeAt(1, subject).value).toEqual(2);
+              expect(getNodeAt(0, subject).previous).toBeNull();
+              expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+              expect(getNodeAt(1, subject).next).toBeNull();
             });
           });
           describe('when index is is out of range', () => {
@@ -142,28 +136,26 @@ describe('LinkedList', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(2);
               subject.add(0, 2);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(2);
-              expect(firstNode.previous).toBeNull();
-              expect(firstNode.next.value).toEqual(0);
-              expect(firstNode.next.previous.value).toEqual(2);
-              expect(firstNode.next.next.value).toEqual(1);
-              expect(firstNode.next.next.previous.value).toEqual(0);
-              expect(firstNode.next.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(2);
+              expect(getNodeAt(0, subject).previous).toBeNull();
+              expect(getNodeAt(1, subject).value).toEqual(0);
+              expect(getNodeAt(1, subject).previous?.value).toEqual(2);
+              expect(getNodeAt(2, subject).value).toEqual(1);
+              expect(getNodeAt(2, subject).previous?.value).toEqual(0);
+              expect(getNodeAt(2, subject).next).toBeNull();
             });
           });
           describe('when index is 1', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(2);
               subject.add(1, 2);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(0);
-              expect(firstNode.previous).toBeNull();
-              expect(firstNode.next.value).toEqual(2);
-              expect(firstNode.next.previous.value).toEqual(0);
-              expect(firstNode.next.next.value).toEqual(1);
-              expect(firstNode.next.next.previous.value).toEqual(2);
-              expect(firstNode.next.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(0);
+              expect(getNodeAt(0, subject).previous).toBeNull();
+              expect(getNodeAt(1, subject).value).toEqual(2);
+              expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+              expect(getNodeAt(2, subject).value).toEqual(1);
+              expect(getNodeAt(2, subject).previous?.value).toEqual(2);
+              expect(getNodeAt(2, subject).next).toBeNull();
             });
           });
           describe('when index is 2', () => {
@@ -175,14 +167,13 @@ describe('LinkedList', () => {
               const subject = new LinkedList<number>();
               (subject as any).head = listNodeZero;
               subject.add(2, 2);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(0);
-              expect(firstNode.previous).toBeNull();
-              expect(firstNode.next.value).toEqual(1);
-              expect(firstNode.next.previous.value).toEqual(0);
-              expect(firstNode.next.next.value).toEqual(2);
-              expect(firstNode.next.next.previous.value).toEqual(1);
-              expect(firstNode.next.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(0);
+              expect(getNodeAt(0, subject).previous).toBeNull();
+              expect(getNodeAt(1, subject).value).toEqual(1);
+              expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+              expect(getNodeAt(2, subject).value).toEqual(2);
+              expect(getNodeAt(2, subject).previous?.value).toEqual(1);
+              expect(getNodeAt(2, subject).next).toBeNull();
             });
           });
           describe('when index is out of range', () => {
