@@ -287,16 +287,15 @@ describe('LinkedList', () => {
         const subject = arrangeLinkedList(1);
         const result = subject.addAll(vector);
         expect(result).toEqual(true);
-        const firstNode = (subject as any).head;
-        expect(firstNode.value).toEqual(0);
-        expect(firstNode.previous).toBeNull();
-        expect(firstNode.next.value).toEqual(0);
-        expect(firstNode.next.previous.value).toEqual(0);
-        expect(firstNode.next.next.value).toEqual(1);
-        expect(firstNode.next.next.previous.value).toEqual(0);
-        expect(firstNode.next.next.next.value).toEqual(2);
-        expect(firstNode.next.next.next.previous.value).toEqual(1);
-        expect(firstNode.next.next.next.next).toBeNull();
+        expect(getNodeAt(0, subject).value).toEqual(0);
+        expect(getNodeAt(0, subject).previous).toBeNull();
+        expect(getNodeAt(1, subject).value).toEqual(0);
+        expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+        expect(getNodeAt(2, subject).value).toEqual(1);
+        expect(getNodeAt(2, subject).previous?.value).toEqual(0);
+        expect(getNodeAt(3, subject).value).toEqual(2);
+        expect(getNodeAt(3, subject).previous?.value).toEqual(1);
+        expect(getNodeAt(3, subject).next).toBeNull();
       });
     });
     describe('when list has two elements', () => {
