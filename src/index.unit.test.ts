@@ -242,15 +242,14 @@ describe('LinkedList', () => {
             it('should add element', () => {
               const subject = arrangeLinkedList(3);
               subject.add(3, 3);
-              const firstNode = (subject as any).head;
-              expect(firstNode.value).toEqual(0);
-              expect(firstNode.next.value).toEqual(1);
-              expect(firstNode.next.previous.value).toEqual(0);
-              expect(firstNode.next.next.value).toEqual(2);
-              expect(firstNode.next.next.previous.value).toEqual(1);
-              expect(firstNode.next.next.next.value).toEqual(3);
-              expect(firstNode.next.next.next.previous.value).toEqual(2);
-              expect(firstNode.next.next.next.next).toBeNull();
+              expect(getNodeAt(0, subject).value).toEqual(0);
+              expect(getNodeAt(1, subject).value).toEqual(1);
+              expect(getNodeAt(1, subject).previous?.value).toEqual(0);
+              expect(getNodeAt(2, subject).value).toEqual(2);
+              expect(getNodeAt(2, subject).previous?.value).toEqual(1);
+              expect(getNodeAt(3, subject).value).toEqual(3);
+              expect(getNodeAt(3, subject).previous?.value).toEqual(2);
+              expect(getNodeAt(3, subject).next).toBeNull();
             });
           });
           describe('when index is 4', () => {
