@@ -185,7 +185,7 @@ describe('LinkedList', () => {
         });
         describe('when there is three elements in the list', () => {
           describe('when index is 0', () => {
-            it.only('should add element', () => {
+            it('should add element', () => {
               const subject = arrangeLinkedList(3);
               subject.add(0, 3);
               expect(getNodeAt(0, subject).previous).toBeNull();
