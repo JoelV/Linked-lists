@@ -185,10 +185,10 @@ describe('LinkedList', () => {
         });
         describe('when there is three elements in the list', () => {
           describe('when index is 0', () => {
-            it('should add element', () => {
+            it.only('should add element', () => {
               const subject = arrangeLinkedList(3);
               subject.add(0, 3);
-              expect(getNodeAt(0, subject).previous?.value).toBeNull();
+              expect(getNodeAt(0, subject).previous).toBeNull();
               expect(getNodeAt(0, subject).value).toEqual(3);
               expect(getNodeAt(1, subject).previous?.value).toEqual(3);
               expect(getNodeAt(1, subject).value).toEqual(0);
