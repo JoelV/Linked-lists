@@ -18,3 +18,7 @@ export function arrangeLinkedList(numberOfNodes: number): LinkedList<number> {
   }
   return list;
 }
+
+export function renderLinkedList(_list: LinkedList<number>): string {
+  return 'undefined';
+}
