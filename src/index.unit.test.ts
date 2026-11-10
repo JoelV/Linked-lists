@@ -1,6 +1,7 @@
 import { LinkedList } from '.';
 import { Collection } from './collection';
 import { ListNode } from './list-node';
+import { arrangeLinkedList } from './test-utils';
 
 describe('LinkedList', () => {
   describe('constructor', () => {
@@ -512,12 +513,12 @@ describe('LinkedList', () => {
 
 function getNodeAt<T>(index: number, list: LinkedList<T>): ListNode<T> {
   let currentNode = list['head'];
-  if(currentNode === null) {
-    throw new Error('getNodeAt: out of bounds exception')  
+  if (currentNode === null) {
+    throw new Error('getNodeAt: out of bounds exception');
   }
   for (let i = 0; i < index; i++) {
-    if(currentNode?.next === null)  {
-      throw new Error('getNodeAt: out of bounds exception')  
+    if (currentNode?.next === null) {
+      throw new Error('getNodeAt: out of bounds exception');
     }
     currentNode = currentNode?.next;
   }
@@ -530,24 +531,6 @@ function arrangeTestVector(): TestVector<number> {
   vector.add(1);
   vector.add(2);
   return vector;
-}
-
-function arrangeLinkedList(numberOfNodes: number): LinkedList<number> {
-  const list = new LinkedList<number>();
-  for (let i = 0; i < numberOfNodes; i++) {
-    const node = new ListNode(i);
-    let currentNode = list['head'];
-    if (currentNode === null) {
-      list['head'] = node;
-    } else {
-      while (currentNode.next !== null) {
-        currentNode = currentNode.next;
-      }
-      currentNode.next = node;
-      node.previous = currentNode;
-    }
-  }
-  return list;
 }
 
 class TestVector<T> implements Collection<T> {
