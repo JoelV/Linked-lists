@@ -19,6 +19,16 @@ export function arrangeLinkedList(numberOfNodes: number): LinkedList<number> {
   return list;
 }
 
-export function renderLinkedList(_list: LinkedList<number>): string {
-  return 'undefined';
+export function renderLinkedList(list: LinkedList<number>): string {
+  if (list['head'] === null) {
+    return 'undefined';
+  }
+  let currentNode: ListNode<number> | null = list['head'];
+  let result = 'null';
+  while (currentNode !== null) {
+    result = `${result} <- ${currentNode.value}`;
+    currentNode = currentNode.next;
+  }
+  result = `${result} -> ${currentNode}`;
+  return result;
 }
